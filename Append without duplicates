@@ -1,0 +1,90 @@
+class node:
+  def __init__(self,data):
+    self.data=data
+    self.next=None
+class ll():
+  def __init__(self):
+    self.head=None
+    self.temp=None
+  def append(self,data):
+    newnode=node(data)
+    if(self.head==None):
+      self.head=newnode
+      self.temp=newnode
+    else:
+      self.temp.next=newnode
+      self.temp=newnode
+  def dup(self):
+    curr=self.head
+    pramo=[]
+    while(curr):
+      if(curr.data in pramo):
+        pre.next=curr.next
+      else:
+        pramo.append(curr.data)
+        pre=curr
+      curr=curr.next
+  def dis(self):
+    if(self.head==None):
+      print("List is empty")
+      return
+    self.temp=self.head
+    while self.temp:
+      print(self.temp.data)
+      self.temp=self.temp.next
+if __name__=='__main__':
+  l=ll()
+  c=0
+  while True:
+    i=int(input())
+    if(i<0):
+      break
+    l.append(i)
+  l.dup()
+  l.dis()
+---------------------------------------------------------------------------------------------------------------------------------------------------
+class node:
+  def __init__(self,data):
+    self.data=data
+    self.next=None
+class ll():
+  def __init__(self):
+    self.head=None
+    self.temp=None
+  def append(self,data):
+    newnode=node(data)
+    if(self.head==None):
+      self.head=newnode
+      self.temp=newnode
+    else:
+      self.temp.next=newnode
+      self.temp=newnode
+  def dup(self):
+    curr=self.head
+    pramo=[]
+    while(curr):
+      if(curr.data in pramo):
+        pre.next=curr.next
+      else:
+        pramo.append(curr.data)
+        pre=curr
+      curr=curr.next
+  def dis(self):
+    self.temp=self.head
+    while self.temp:
+      print(self.temp.data)
+      self.temp=self.temp.next
+if __name__=='__main__':
+  l=ll()
+  c=0
+  while True:
+    i=int(input())
+    if(i>=0):
+      l.append(i)
+      c=c+1
+    else:
+      break
+  if(c==0):
+    print("List is empty")
+  l.dup()
+  l.dis()
