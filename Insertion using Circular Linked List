@@ -1,0 +1,39 @@
+class node:
+  def __init__(self,data):
+    self.data=data
+    self.next=None
+class cll:
+  def __init__(self):
+    self.head=None
+    self.temp=None
+  def append(self,data):
+    newnode=node(data)
+    if(self.head==None):
+      self.head=newnode
+      self.temp=newnode
+    else:
+      self.temp.next=newnode
+      self.temp=newnode
+    self.temp.next=self.head
+  def dis(self):
+    self.temp=self.head
+    if self.head is None:
+      print("No element")
+      return
+    else:
+      print(self.temp.data,end=" ")
+      self.temp=self.temp.next
+    while self.temp != self.head:
+      print(self.temp.data,end=" ")
+      self.temp=self.temp.next
+if __name__=='__main__':
+  l=cll()
+  while True:
+    e=int(input())
+    t=int(input())
+    if(t==1):
+      l.append(e)
+    else:
+      l.append(e)
+      break
+  l.dis()
