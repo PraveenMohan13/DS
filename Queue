@@ -1,0 +1,81 @@
+import java.util.*;
+class Node {
+    int data;
+    Node next;
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+class LinkedList {
+    Node front;
+    Node rear;
+    public void enqueu(int n) {
+        Node newNode = new Node(n);
+        if (front == null&&rear==null) {
+            front = newNode;
+            rear= newNode;
+        } else {
+            rear.next = newNode;
+            rear = newNode;
+        }
+    }
+
+    public void dequeu() {
+        if (front == null)
+            throw new ArrayIndexOutOfBoundsException("Empty Stack");
+        else {
+            front = front.next;
+        }
+    }
+    public void poll() {
+        if (front == null)
+            throw new ArrayIndexOutOfBoundsException("Empty Stack");
+        else {
+            System.out.println(front.data);
+            front = front.next;
+        }
+    }
+    public void peek() {
+        if (front == null)
+            throw new ArrayIndexOutOfBoundsException("Empty Stack");
+        else {
+            System.out.println(front.data);
+        }
+    }
+
+    public void display() {
+        if (front == null&&rear==null)
+            throw new ArrayIndexOutOfBoundsException("Empty Stack");
+        else {
+            Node temp = front;
+            while (temp != null) {
+                System.out.print(temp.data + " ");
+                temp = temp.next;
+            }
+            System.out.print("NULL");
+            System.out.println();
+        }
+    }
+}
+class Main {
+    public static void main(String[] args) {
+        LinkedList l = new LinkedList();
+        Scanner z=new Scanner(System.in);
+        while(true)
+        {
+            int i=z.nextInt();
+            if(i<0)
+            break;
+            l.enqueu(i);
+            
+        }
+        l.display();
+        l.dequeu();
+        l.display();
+        l.peek();
+        l.display();
+        l.poll();
+        l.display();
+    }
+}
