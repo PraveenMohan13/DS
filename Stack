@@ -1,0 +1,77 @@
+import java.util.*;
+class Node {
+    int data;
+    Node next;
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+class LinkedList {
+    Node top;
+
+    public void push(int n) {
+        Node newNode = new Node(n);
+        if (top == null) {
+            top = newNode;
+        } else {
+            newNode.next = top;
+            top = newNode;
+        }
+    }
+
+    public void pop() {
+        if (top == null)
+            throw new ArrayIndexOutOfBoundsException("Empty Stack");
+        else {
+            top = top.next;
+        }
+    }
+
+    public void peek() {
+        if (top == null)
+            throw new ArrayIndexOutOfBoundsException("Empty Stack");
+        else {
+            System.out.println(top.data);
+        }
+    }
+
+    public void display() {
+        if (top == null)
+            throw new ArrayIndexOutOfBoundsException("Empty Stack");
+        else {
+            Node temp = top;
+            while (temp != null) {
+                System.out.print(temp.data + "->");
+                temp = temp.next;
+            }
+            System.out.print("NULL");
+            System.out.println();
+        }
+    }
+}
+class Main {
+    public static void main(String[] args) {
+        LinkedList l = new LinkedList();
+        Scanner z=new Scanner(System.in);
+        while(true)
+        {
+            int i=z.nextInt();
+            if(i<0)
+            break;
+            l.push(i);
+            
+        }
+        
+        // l.push(1);
+        // l.push(2);
+        // l.push(3);
+        // l.push(4);
+        // l.push(5);
+        l.display();
+        l.pop();
+        l.display();
+        l.peek();
+        l.display();
+    }
+}
