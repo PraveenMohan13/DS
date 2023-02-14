@@ -1,0 +1,79 @@
+import java.util.*;
+
+class Node {
+    char data;
+    Node next = null;
+}
+
+public class BalancedExpression {
+
+    static Node top;
+
+    static void push(char num) {
+        Node newNode = new Node();
+        newNode.data = num;
+        if (top == null) {
+            top = newNode;
+            return;
+        }
+        newNode.next = top;
+        top = newNode;
+    }
+
+    static char pop() {
+        Node temp = top;
+        char returnChar = temp.data;
+        // System.out.println("Popped: " + temp.data);
+        top = top.next;
+        return returnChar;
+    }
+
+    static boolean isEmpty() {
+        if (top == null) {
+            return true;
+        }
+        return false;
+    }
+
+    static boolean isBalanced(String expr) {
+        for (int i = 0; i < expr.length(); i++) {
+            char x = expr.charAt(i);
+            if (x == '(' || x == '[' || x == '{') {
+                push(x);
+                continue;
+            }
+            if (isEmpty()) {
+                return false;
+            }
+            char check;
+            switch (x) {
+                case ')':
+                    check = pop();
+                    if (check == '{' || check == '[')
+                        return false;
+                    break;
+                case '}':
+                    check = pop();
+                    if (check == '(' || check == '[')
+                        return false;
+                    break;
+                case ']':
+                    check = pop();
+                    if (check == '(' || check == '{')
+                        return false;
+                    break;
+            }
+        }
+        return (isEmpty());
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String expr = sc.nextLine();
+        if (isBalanced(expr))
+            System.out.println("Balanced ");
+        else
+            System.out.println("Not Balanced ");
+        sc.close();
+    }
+}
