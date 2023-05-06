@@ -1,0 +1,90 @@
+Tree traversals
+public class tree {
+    static class node {
+        int data;
+        node left;
+        node right;
+
+        public node(int data) {
+            this.data = data;
+            this.left = null;
+            this.right = null;
+        }
+    }
+
+    node root;
+
+    public static void ins(pre l, int data) {
+        node n = new node(data);
+        if (l.root == null)
+            l.root = n;
+        else {
+            node t = l.root;
+            while (true) {
+                if (data < t.data) {
+                    if (t.left == null) {
+                        t.left = n;
+                        break;
+                    } else
+                        t = t.left;
+                } else {
+                    if (t.right == null) {
+                        t.right = n;
+                        break;
+                    } else
+                        t = t.right;
+                }
+            }
+        }
+    }
+
+    public static void preOr(node l) {
+        if (l == null)
+            return;
+        else {
+
+            System.out.print(l.data + " ");
+            preOr(l.left);
+            preOr(l.right);
+        }
+    }
+
+    public static void inOr(node l) {
+        if (l == null)
+            return;
+        else {
+            inOr(l.left);
+            System.out.print(l.data + " ");
+
+            inOr(l.right);
+        }
+    }
+
+    public static void posOr(node l) {
+        if (l == null)
+            return;
+        else {
+            posOr(l.left);
+            posOr(l.right);
+            System.out.print(l.data + " ");
+
+        }
+    }
+
+    public static void main(String args[]) {
+        pre l = new pre();
+        ins(l, 4);
+        ins(l, 2);
+        ins(l, 3);
+        ins(l, 1);
+        ins(l, 6);
+        ins(l, 5);
+        ins(l, 7);
+        node n = l.root;
+        preOr(n);
+        System.out.println();
+        inOr(n);
+        System.out.println();
+        posOr(n);
+    }
+}
