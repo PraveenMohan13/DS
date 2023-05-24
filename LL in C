@@ -31,3 +31,98 @@ int main() {
         temp=temp->next;
     }
 }
+-------------------------------------------------------------------------------------------------------
+#include<stdio.h>
+#include<stdlib.h>
+struct Node{
+    int data;
+    struct Node *next;
+};
+struct Node *head,*tail,*newNode;
+ 
+ struct Node createNode(int a){
+    newNode=(struct Node*)malloc(sizeof (struct Node));
+    newNode->data=a;
+    newNode-> next=NULL;
+
+ }
+ 
+ void insert (int a) {
+    createNode(a);
+    if (head == NULL){
+    head=newNode;
+    tail=newNode;
+    }
+    else{
+    tail->next=newNode;
+    tail=newNode;
+    }
+ }
+  void print(struct Node *h){
+    while(h!=NULL){
+    printf("%d", h->data);
+    h=h->next;
+    }
+}
+
+int main(){
+    while(1){
+    int a;
+    scanf("%d", &a);
+    if(a>0)
+    insert(a);
+    else
+        break;
+}
+    print(head);
+    return 0;
+}
+-------------------------------------------------------------------------------------------------------
+#include<stdio.h>
+#include<stdlib.h>
+struct Node{
+    int data;
+    struct Node* next;
+};
+
+ struct Node* head = NULL;
+ struct Node* tail = NULL;
+ 
+ struct Node* createNode(int a){
+    struct Node* newNode=(struct Node*)malloc(sizeof (struct Node));
+    newNode->data=a;
+    newNode-> next=NULL;
+    return newNode;
+
+ }
+ 
+ void insert (int a) {
+    struct Node* newNode=createNode(a);
+    if (head == NULL){
+    head=newNode;
+    tail=newNode;
+    }
+    else{
+    tail->next=newNode;
+    tail=newNode;
+    }
+ }
+  void print(struct Node* h){
+    while(h!=NULL){
+    printf("%d", h->data);
+    h=h->next;
+    }
+}
+
+int main(){
+    while(1){
+    int a;
+    scanf("%d", &a);
+    if(a>0)
+    insert(a);
+    else
+        break;
+}
+    print(head);
+    return 0;
+}
