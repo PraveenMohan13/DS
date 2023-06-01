@@ -1,0 +1,178 @@
+Print adjacency list
+Given the number of edges 'E' and vertices 'V' of a bidirectional graph. Your task is to build a graph through the adjacency list and print the adjacency list for each vertex.
+
+
+
+Format:
+
+Input:
+
+The first line of input is T denoting the number of test cases. Then the first line of each test case contains two positive integers V and E. Where 'V' is the number of vertexes and 'E' is the number of edges in a graph. Next, the 'E' line contains two positive numbers showing that there is an edge between this two vertex.
+
+Output:
+
+For each vertex, print their connected nodes in the order you are pushing them inside the list. See the given example.
+
+
+
+Constraints:
+
+1 <= T <= 200
+
+1 <= V <= 103
+
+1 <= E <= V*(V-1)
+
+
+
+Example:
+
+Input:
+
+2
+
+5 7
+
+0 1
+
+0 4
+
+1 2
+
+1 3
+
+1 4
+
+2 3
+
+3 4
+
+3 3
+
+0 1
+
+1 2
+
+2 0
+
+Output:
+
+0-> 1-> 4
+
+1-> 0-> 2-> 3-> 4
+
+2-> 1-> 3
+
+3-> 1-> 2-> 4
+
+4-> 0-> 1-> 3
+
+0-> 1-> 2
+
+1-> 0-> 2
+
+2-> 1-> 0
+
+Explanation:
+
+Testcase 1: Given graph has 5 nodes and 7 edges. After creating adjacency list of given graph, we have created a list:
+
+0-> 1-> 4
+
+1-> 0-> 2-> 3-> 4
+
+2-> 1-> 3
+
+3-> 1-> 2-> 4
+
+4-> 0-> 1-> 3
+
+----------------------------------------------------------------------------------------------------------------------
+#include<vector>
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+ {
+     int t,i,j,inp1,inp2,k;
+     cin>>t;
+    for(i=0; i<t; i++) 
+    {
+        int e,v;
+        int flag=0;
+        cin>>v>>e;
+        vector <int> adj[v];
+        if(e == 0) 
+        {
+            for(j=0; j<v; j++)
+                cout<<j<<endl;
+                flag=1;
+        }
+        if(flag == 1) continue;
+        for(j=0; j<e; j++) 
+        {
+            cin>>inp1>>inp2;
+            adj[inp1].push_back(inp2);
+            adj[inp2].push_back(inp1);
+        }
+        for(k=0; k<v; k++) 
+        {
+            cout<<k;
+        for(j=0; j<adj[k].size(); j++) 
+        {
+                cout<<"-> "<<adj[k][j];
+        }
+        cout<<endl;
+        }
+    }
+    
+	return 0;
+}
+---------------------------------------------------------------------------
+import java.lang.*;
+import java.util.*;
+
+class Main {
+	public static void main (String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int t = sc.nextInt();
+		while(t-- > 0)
+		{
+		    int v = sc.nextInt();
+		    int e = sc.nextInt();
+		    int a[][] = new int[e][2];
+		    for(int i=0;i<e;i++)
+		    {
+		        a[i][0] = sc.nextInt();
+		        a[i][1] = sc.nextInt();
+		    }
+		    for(int i=0;i<v;i++)
+		    {
+		        System.out.print(i);
+		        for(int j=0;j<e;j++)
+		        {
+		            if(a[j][0]==i)
+		                System.out.print("-> " + a[j][1]);
+		            if(a[j][1]==i)
+		                System.out.print("-> " + a[j][0]);
+		        }
+		        System.out.println();
+		    }
+		}
+	}
+}
+-------------------------------------------------------------------------------------
+test_cases = input()
+for test_case in range(int(test_cases)):
+    
+    num_nodes, num_edges = input().split()
+    adjacency_list = [list() for x in range(int(num_nodes))]
+    for e in range(int(num_edges)):
+        from_node, to_node = input().split()
+        adjacency_list[int(from_node)].append(to_node)
+        adjacency_list[int(to_node)].append(from_node)
+
+    for node, edges in enumerate(adjacency_list):
+        adjacency_str = str(node)
+        if len(edges) > 0:
+            adjacency_str += '-> ' + '-> '.join(edges)
+        print(adjacency_str)
