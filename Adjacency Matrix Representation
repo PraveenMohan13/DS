@@ -1,0 +1,202 @@
+Graph-Adjacency Matrix Representation
+Write a program to implement a graph using an adjacency Matrix.
+
+
+
+Example:
+
+Input:
+
+4
+
+4
+
+yes
+
+1 2 6
+
+2 3 7
+
+3 4 8
+
+2 4 9
+
+Output:
+
+Please enter the number of nodes in the graph
+
+Please enter the number of edges in the graph
+
+Is the graph directed
+
+Adjacency Matrix Representation:
+
+0 0 0 0
+
+0 0 0 0
+
+0 0 0 0
+
+0 0 0 0
+
+Enter the start node, end node and weight of edge no 1
+
+Enter the start node, end node and weight of edge no 2
+
+Enter the start node, end node and weight of edge no 3
+
+Enter the start node, end node and weight of edge no 4
+
+Adjacency Matrix Representation:
+
+0 6 0 0
+
+0 0 7 9
+
+0 0 0 8
+
+0 0 0 0
+------------------------------------------------------------------------------------------------------------
+
+
+import java.util.*;
+import java.lang.*;
+
+class Main {
+    
+    public static void  printadjmatrix(int A[][],int rows){
+        int i,j;
+	    System.out.println("Adjacency Matrix Representation:");
+	    for(i=1;i<=rows;i++)
+	    {
+		    for(j=1;j<=rows;j++)
+		    {
+		        System.out.print(A[i][j]+" ");
+		    }
+	        System.out.println();
+        }
+    }
+    
+	public static void main (String[] args) {
+		Scanner sc=new Scanner(System.in);
+		int rows,edges,snode,enode,weight;
+		System.out.println("Please enter the number of nodes in the graph");
+		rows=sc.nextInt();
+		System.out.println("Please enter the number of edges in the graph");
+		edges=sc.nextInt();
+		System.out.println("Is the graph directed");
+		//sc.nextLine();
+		String directed=sc.next();
+		int A[][]=new int[rows+1][rows+1];
+		for(int i=1;i<=rows;i++){
+		    for(int j=1;j<=rows;j++){
+		        A[i][j]=0;
+		    }
+		}
+		printadjmatrix(A,rows);
+		//sc.next();
+		for(int i=1;i<=edges;i++){
+		    //sc.next();
+		    System.out.println("Enter the start node, end node and weight of edge no "+i);
+		    snode=sc.nextInt();
+		    enode=sc.nextInt();
+		    weight=sc.nextInt();
+		    if((directed.equals("yes"))==true){
+		        A[snode][enode]=weight;
+		    }
+		    else{
+		        A[snode][enode]=weight;
+			    A[enode][snode]=weight;
+		    }
+		}
+		printadjmatrix(A,rows);
+	}
+}
+
+------------------------------------------------------------------------------------------------------------------------
+#include<iostream>
+#include<cstring>
+#include<cstdlib>
+using namespace std;
+void printadjmatrix(int **A,int rows)
+{
+	int i,j;
+	cout<<"Adjacency Matrix Representation:\n";
+	for(i=1;i<=rows;i++)
+	{
+		for(j=1;j<=rows;j++)
+		{
+		    cout<<A[i][j]<<" ";
+		}
+	    cout<<endl;
+    }
+}
+int main()
+{
+    int **A,rows,edges,snode,enode,weight,i;
+	char directed[4];
+	cout<<"Please enter the number of nodes in the graph\n";
+	cin>>rows;
+	cout<<"Please enter the number of edges in the graph\n";
+	cin>>edges;
+	cout<<"Is the graph directed\n";
+	cin>>directed;
+	A = (int **)malloc(rows * sizeof(int *));
+	for(i=1;i<=rows;i++)
+		*(A+i)=(int *)calloc(rows,sizeof(int));
+	printadjmatrix(A,rows);
+	for(i = 1;i<=edges;i++)
+	{
+		cout<<"Enter the start node, end node and weight of edge no "<<i<<endl;
+		cin>>snode>>enode>>weight;
+		if(strcmp(directed,"yes") == 0)
+			A[snode][enode]=weight;
+		else
+		{
+			A[snode][enode]=weight;
+			A[enode][snode]=weight;
+		}
+	}
+    printadjmatrix(A,rows);
+    return 0;
+}
+-----------------------------------------------------------------------------
+
+def printadjmatrix(A,rows):
+    print("Adjacency Matrix Representation:")
+    for i in range(1, rows+1):
+        for j in range(1, rows+1):
+            print(A[i][j],end=" ")
+        print()
+
+
+print("Please enter the number of nodes in the graph")
+rows=int(input())
+print("Please enter the number of edges in the graph")
+edges=int(input())
+print("Is the graph directed")
+directed=input()
+A=[[0 for x in range(rows+1)] for y in range(rows+1)]
+for i in range(1, rows+1):
+    for j in range(1, rows+1):
+        A[i][j]= 0
+
+printadjmatrix(A,rows)
+
+for i in range(1,edges+1):
+    print("Enter the start node, end node and weight of edge no ",end="");
+    print(i)
+    snode, enode, weight =[int(x) for x in input().split()]
+    # snode, enode, weight = int(input().split())
+    if directed=="yes":
+        A[snode][enode]=weight;
+    else:
+        A[snode][enode]=weight;
+        A[enode][snode]=weight;
+	    
+printadjmatrix(A,rows)
+
+
+
+
+
