@@ -1,0 +1,103 @@
+Given a Singly Linked List of integers, delete all the alternate nodes in the list.
+Example:
+List: 10 -> 20 -> 30 -> 40 -> 50 -> 60 -> null
+Alternate nodes will be: 20, 40, and 60.
+Hence after deleting, the list will be:
+Output: 10 -> 30 -> 50 -> null
+Input Format
+
+The first and the only line of input will contain the elements of the Singly Linked List separated by a single space and terminated by -1.
+Constraints
+
+1 <= N <= 10 ^ 6.
+Where N is the size of the Singly Linked List
+Time Limit: 1 sec
+Output Format
+
+The only line of output will contain the updated list elements.
+Sample Input 0
+
+1 2 3 4 5 -1
+Sample Output 0
+
+1 3 5
+Sample Input 1
+
+10 20 30 40 50 60 70 -1
+Sample Output 1
+
+10 30 50 70
+---------------------------------------------------------------------------------------
+import java.io.*;
+import java.util.*;
+
+class node
+{
+    int data;
+    node next;
+    
+    node(int data)
+    {
+        this.data = data;
+        next = null;
+    }
+}
+
+
+public class Solution {
+    
+    public static node takeInput() 
+    {
+
+        node head = null, tail = null;
+        Scanner s = new Scanner(System.in);
+        int data = s.nextInt();
+
+        while(data != -1) 
+        {
+            node newnode = new node(data);
+            if (head == null) 
+            {
+                head = newnode;
+                tail = newnode;
+
+            } else 
+            {
+                tail.next = newnode;
+                tail = newnode;
+            }
+            data = s.nextInt();
+        }
+        return head;
+    }
+
+    public static void deleteAlternateNodes(node head) {
+        node cur = head;
+        node cur1;
+        
+        while(cur != null && cur.next != null){
+            cur1 = cur.next;
+            cur.next = cur1.next;
+            cur = cur.next;
+            
+        }
+    }
+    
+    public static void print(node head)
+    {
+        while(head != null)
+        {
+            System.out.print(head.data + " ");
+            head = head.next;
+        }
+        
+        System.out.println();
+    }
+
+
+    public static void main(String[] args) {
+        node head = takeInput();
+        deleteAlternateNodes(head);
+        print(head);
+    }
+}
