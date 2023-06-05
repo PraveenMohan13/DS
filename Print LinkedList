@@ -1,0 +1,143 @@
+First take a linkedList and then try to print that LinkedList
+
+Input Format
+
+Take LinkedList Input
+
+Constraints
+
+no
+
+Output Format
+
+Print the LinkedList
+
+Sample Input 0
+
+1 2 3 4 5 -1
+Sample Output 0
+
+1 2 3 4 5
+Sample Input 1
+
+5 6 7 8 9 -1
+Sample Output 1
+
+5 6 7 8 9
+-------------------------------------------------
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    Node head;
+    Node temp;
+    class Node
+    {
+        int data;
+        Node next;
+        Node(int data)
+        {
+            this.data=data;
+            this.next=null;
+        }
+    }
+    void ins(int data)
+    {
+        Node nn=new Node(data);
+        if(head==null)
+        {
+            head=nn;
+            temp=nn;
+        }
+        else
+        {
+            temp.next=nn;
+            temp=nn;
+        }
+    }
+    void dis()
+    {
+        temp=head;
+        while(temp!=null)
+        {
+            System.out.print(temp.data+" ");
+            temp=temp.next;
+        }  
+    }
+    public static void main(String[] args) {
+        Scanner z=new Scanner(System.in);
+        Solution s=new Solution();
+        while(true)
+        {
+            int n=z.nextInt();
+                if(n!=-1)
+                  s.ins(n);
+                else
+                    break;
+        }
+        s.dis();
+      
+    }
+}
+-----------------------------------------------------
+
+import java.util.*;
+class Node {
+    int data;
+    Node next;
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+class LinkedList {
+    Node head;
+    Node temp;
+    public void append(int n)
+    {
+        Node newnode=new Node(n);
+        if(head==null)
+        {
+            head=newnode;
+            temp=newnode;
+        }
+        else
+        {
+            temp.next=newnode;
+            temp=newnode;
+        }
+    }
+    public void dis()
+    {
+        if(head==null)
+            throw new ArrayIndexOutOfBoundsException("Empty");
+        else
+        {
+            temp=head;
+            while(temp!=null)
+            {
+                System.out.print(temp.data + " ");
+                temp = temp.next;
+            }
+            System.out.print("Done");
+        }        
+    }
+}
+class Main {
+    public static void main(String[] args) {
+        LinkedList l = new LinkedList();
+        Scanner z=new Scanner(System.in);
+        while(true)
+        {
+            int i=z.nextInt();
+            if(i<0)
+            break;
+            l.append(i);    
+        }
+        l.dis();
+    }
+}
