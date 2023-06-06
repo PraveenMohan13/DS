@@ -1,0 +1,105 @@
+You have been given a singly linked list of integers. Write a function to print the list in a reverse order.
+To explain it further, you need to start printing the data from the tail and move towards the head of the list, printing the head data at the end.
+Input Format
+
+The first and the only line of each test case or query contains the elements of the singly linked list separated by a single space.
+Constraints
+
+0 <= M <= 10^3
+Time Limit: 1sec
+Where 'M' is the size of the singly linked list.
+Output Format
+
+Reversed LinkedList
+Sample Input 0
+
+1 2 3 4 5 -1
+Sample Output 0
+
+5 4 3 2 1
+Sample Input 1
+
+5 4 3 2 1 -1
+Sample Output 1
+
+1 2 3 4 5
+-------------------------------------------------------------------------------------------------------------
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    Node head;
+    Node temp;
+    class Node
+    {
+        int data;
+        Node next;
+        Node(int data)
+        {
+            this.data=data;
+            this.next=null;
+        }
+    }
+    void ins(int data)
+    {
+        Node nn=new Node(data);
+        if(head==null)
+        {
+            head=nn;
+        }
+        else
+        {
+            nn.next=head;
+            head=nn;
+        }
+    }
+    void dis()
+    {
+        temp=head;
+        while(temp!=null)
+        {
+            System.out.print(temp.data+" ");
+            temp=temp.next;
+        }  
+    }
+    public static void main(String[] args) {
+        Scanner z=new Scanner(System.in);
+        Solution s=new Solution();
+        while(true)
+        {
+            int n=z.nextInt();
+                if(n!=-1)
+                  s.ins(n);
+                else
+                    break;
+        }
+        s.dis();
+      
+    }
+}
+------------------------------------------------------------------------------------------------------------
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner z=new Scanner(System.in);
+        LinkedList<Integer> l=new LinkedList();
+        while(true)
+        {
+            int n=z.nextInt();
+            if(n!=-1)
+                l.addFirst(n);
+            else
+                break;
+        }
+        for(int i:l)
+        System.out.print(i+" ");
+        
+    }
+}
