@@ -1,0 +1,165 @@
+Given an unsorted list of nodes. The task is to remove duplicates from the list.
+
+Input Format
+
+The first line of each test case or query contains the elements of the singly linked list separated by a single space.
+Remember/Consider :
+While specifying the list elements for input, -1 indicates the end of the singly linked list and hence, would never be a list element.
+Constraints
+
+Time Limit: 1sec
+
+Output Format
+
+For each test case/query, print the resulting singly linked list of integers in a row, separated by a single space.
+Sample Input 0
+
+1 2 3 1 2 -1
+Sample Output 0
+
+1 2 3
+Sample Input 1
+
+2 3 4 -1
+Sample Output 1
+
+2 3 4
+----------------------------------------------------------------------------------------------
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+        node head;
+        node temp;
+    class node
+    {
+        int data;
+        node next;
+        node(int data)
+        {
+            this.data=data;
+            next=null;
+        }
+    };
+     void ins(int data)
+    {
+        node nn=new node(data);
+        if(head==null)
+        {
+            head=nn;
+            temp=nn;
+            return;
+        }
+        node t=head;
+        while(t!=null)
+        {
+            if(nn.data==t.data)
+                return;
+            t=t.next;
+        }
+        
+        temp.next=nn;
+        temp=nn;
+    }
+     void dis()
+    {
+        temp=head;
+        while(temp!=null){
+            System.out.print(temp.data+" ");
+            temp=temp.next;
+    }
+     }
+    public static void main(String[] args) {
+        Scanner z=new Scanner(System.in);
+        Solution s=new Solution();
+        while(true)
+        {
+            int n=z.nextInt();
+            if(n!=-1)
+                s.ins(n);
+            else
+                break;
+        }
+        s.dis();
+    }
+}
+---------------------------------------------------------------------
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+        node head;
+        node temp;
+    class node
+    {
+        int d;
+        node next;
+        node (int data)
+        {
+            d=data;
+            next=null;
+        }        
+     }
+    void ins(int data)
+    {
+        node nn=new node(data);
+        if(head==null)
+        {
+            head=nn;
+            temp=nn;
+            return;
+        }
+        temp.next=nn;
+        temp=nn;
+    }
+    void rem()
+    {
+        node p1;
+        node p2;
+        temp=head;
+        while(temp!=null)
+        {
+            p1=temp;
+            p2=temp.next;
+            while(p2!=null)
+            {
+                if(temp.d==p2.d)
+                {
+                    p1.next=p2.next;
+                    p2.next=null;
+                    p2=p1.next;
+                }
+                else
+                {
+                    p1=p1.next;
+                    p2=p2.next;
+                }  
+            }
+            temp=temp.next;
+        }
+    }
+    void dis()
+    {
+        temp=head;
+        while(temp!=null)
+        {
+            System.out.print(temp.d+" ");
+            temp=temp.next;
+        }
+    }
+    public static void main(String[] args) {
+        Scanner z=new Scanner(System.in);
+        Solution s=new Solution();
+        while(true)
+        {
+            int n=z.nextInt();
+            if(n!=-1)
+                s.ins(n);
+            else
+                break;
+        }
+        s.rem();
+        s.dis();
+    
+    }
+}
