@@ -84,7 +84,32 @@ public class Solution {
     }
 }
 -----------------------------------------------------
+import java.io.*;
+import java.util.*;
 
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner z=new Scanner(System.in);
+        LinkedList<Integer> l=new LinkedList();
+        while(true)
+        {
+            int n=z.nextInt();
+            if(n!=-1)
+                l.add(n);
+            else
+                break;
+        }
+        
+     Iterator<Integer> i=l.iterator();  
+  while(i.hasNext())
+   System.out.print(i.next()+" "); 
+        
+        // for(int a:l)
+        //     System.out.print(a+" ");
+    }
+}
+-------------------------------------------------------------
 import java.util.*;
 class Node {
     int data;
