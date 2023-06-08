@@ -1,0 +1,87 @@
+Given a generic tree, find and return the sum of all nodes present in the given tree.
+
+Input Format
+
+The first line of input contains data of the nodes of the tree in level order form. The order is: data for root node, number of children to root node, data of each of child nodes and so on and so forth for each node. The data of the nodes of the tree is separated by space
+
+Constraints
+
+Time:- 1 sec
+
+Output Format
+
+The first and only line of output prints the sum of all nodes of the given generic tree.
+
+Sample Input 0
+
+10 3 20 30 40 2 40 50 0 0 0 0
+Sample Output 0
+
+190
+Sample Input 1
+
+6 3 4 10 9 2 3 2 1 1 3 12 7 5 0 0 2 11 8 0 0 0 0 0
+Sample Output 1
+
+78
+----------------------------------------------------------------------
+import java.util.*;
+import java.io.*;
+
+class Node {
+    int data;
+    ArrayList<Node> children;
+    
+    public Node(int data) {
+        this.data = data;
+        children = new ArrayList<>();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        Scanner z=new Scanner(System.in);
+        String[] input = z.nextLine().split(" ");
+        ArrayList<Integer> li = new ArrayList<>();
+        for (String s : input) {
+            li.add(Integer.parseInt(s));
+        }
+        Node root = inputLevelWise(li);
+        System.out.println(sumOfAllNodes(root));
+    }
+    public static Node inputLevelWise(ArrayList<Integer> li) {
+        int i = 0;
+        int data = li.get(i);
+        i++;
+        if (data == -1) {
+            return null;
+        }
+        Node root = new Node(data);
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        while (!q.isEmpty()) {
+            Node frontNode = q.poll();
+            int noOfChildren = li.get(i);
+            i++;
+            for (int j = 0; j < noOfChildren; j++) {
+                int childData = li.get(i + j);
+                Node childNode = new Node(childData);
+                frontNode.children.add(childNode);
+                q.add(childNode);
+            }
+            i += noOfChildren;
+        }
+        return root;
+    }
+
+    public static int sumOfAllNodes(Node root) {
+        if (root == null) {
+            return Integer.MIN_VALUE;
+        }
+        int total = 0;
+        for (Node child : root.children) {
+            total += sumOfAllNodes(child);
+        }
+        return total + root.data;
+    }
+}
