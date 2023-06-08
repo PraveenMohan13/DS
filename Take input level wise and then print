@@ -25,6 +25,81 @@ Sample Input 1
 Sample Output 1
 
 1 2 3
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+import java.io.*;
+import java.util.*;
+
+public class Solution 
+{
+    static class Node
+    {
+      int data;
+      Node left;
+      Node right;
+        
+        public Node(int data) 
+    {
+            this.data = data;
+            this.left = null;
+            this.right = null;
+        }
+    }
+   
+       static Node root = null;
+
+        static Queue<Node> q =new LinkedList<>();
+
+    
+   
+    
+        static void insertValue(int value)
+        {
+          Node nn =new Node(value);
+          if (root == null)
+            root = nn;
+
+          else if (q.peek().left == null)
+            q.peek().left = nn;
+          else
+          {
+            q.peek().right = nn;
+            q.remove();
+          }
+          q.add(nn);
+
+        }
+            static void printlevelOrder(Node root)
+            {
+              if (root == null)
+                return;
+                
+              Queue<Node> q1 =new LinkedList<>();
+              q1.add(root);
+        
+              while (!q1.isEmpty())
+              {
+                System.out.print(q1.peek().data + " ");
+                if (q1.peek().left != null)
+                  q1.add(q1.peek().left);
+                if (q1.peek().right != null)
+                  q1.add(q1.peek().right);
+                q1.remove();
+              }
+            }
+
+    public static void main(String[] args) 
+    {
+        Scanner z = new Scanner(System.in);
+        int n = z.nextInt();
+        for(int i=0;i<n;i++)
+        {
+            insertValue(z.nextInt());
+        }
+        printlevelOrder(root);
+    }
+}
+
+
 
 ----------------------------------------------------------------------
 import java.io.*;
