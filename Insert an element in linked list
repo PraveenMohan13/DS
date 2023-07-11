@@ -29,7 +29,6 @@ if __name__=='__main__':
   l.dis()
 ---------------------------------------------------------------------------------------
 ins at beg
-
 class node:
     def __init__(self,data):
         self.data=data
@@ -51,10 +50,12 @@ class ll:
             t=t.next
 if __name__=="__main__":
     z=ll()
-    while(True):
-        i=int(input())
+    i=int(input())
+    for i in range(0,i):
+        n=int(input())
         if(i<0):
             break
-        z.append(i)
+        else:
+            z.append(n)
     z.dis()
-        
+-------------------------------------------------------------------------------------------------------------
