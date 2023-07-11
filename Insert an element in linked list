@@ -59,3 +59,65 @@ if __name__=="__main__":
             z.append(n)
     z.dis()
 -------------------------------------------------------------------------------------------------------------
+class node:
+    def __init__(self,data):
+        self.data=data
+        self.next=None
+class ll:
+    def __init__(self):
+        self.head=None
+    def inse(self,data):
+        newnode=node(data)
+        if(self.head==None):
+            self.head=newnode
+        else:
+            t=self.head
+            while(t.next):
+                t=t.next
+            t.next=newnode
+    def insb(self,data):
+        newnode=node(data)
+        if(self.head==None):
+            self.head=newnode
+        else:
+            newnode.next=self.head
+            self.head=newnode
+    def insp(self,pos,data):
+        newnode=node(data)
+        t=self.head
+        for i in range(1,pos):
+            t=t.next
+        newnode.next=t.next
+        t.next=newnode
+    def dis(self):
+        t=self.head
+        while(t):
+            print(t.data)
+            t=t.next
+if __name__=='__main__':
+    c=0
+    l=ll()
+    while(True):
+        i=int(input("enter the choice = "))
+        if(i==1):
+            n=int(input("enter the element = "))
+            l.inse(n)
+            c=c+1
+        elif(i==2):
+            n=int(input("enter the element = "))
+            l.insb(n)
+            c=c+1
+        elif(i==3):
+            pos=int(input("the the pos = "))
+            if(pos>c):
+                print("invalid input")
+            else:
+                n=int(input("enter the element = "))
+                l.insp(pos,n)
+                c=c+1
+        elif(i==4):
+            l.dis()
+        else:
+            print("exit");
+            break
+    
