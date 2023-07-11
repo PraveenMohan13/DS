@@ -27,3 +27,34 @@ if __name__=='__main__':
       break
     l.append(i)
   l.dis()
+---------------------------------------------------------------------------------------
+ins at beg
+
+class node:
+    def __init__(self,data):
+        self.data=data
+        self.next=None
+class ll:
+    def __init__(self):
+        self.head=None
+    def append(self,data):
+        nn=node(data)
+        if(self.head==None):
+            self.head=nn
+        else:
+            nn.next=self.head
+            self.head=nn
+    def dis(self):
+        t=self.head
+        while(t):
+            print(t.data)
+            t=t.next
+if __name__=="__main__":
+    z=ll()
+    while(True):
+        i=int(input())
+        if(i<0):
+            break
+        z.append(i)
+    z.dis()
+        
