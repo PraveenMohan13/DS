@@ -89,6 +89,8 @@ class ll:
             t=t.next
         newnode.next=t.next
         t.next=newnode
+    def delll(self):
+        self.head=self.head.next
     def dis(self):
         t=self.head
         while(t):
@@ -101,11 +103,11 @@ if __name__=='__main__':
         i=int(input("enter the choice = "))
         if(i==1):
             n=int(input("enter the element = "))
-            l.inse(n)
+            l.insb(n)
             c=c+1
         elif(i==2):
             n=int(input("enter the element = "))
-            l.insb(n)
+            l.inse(n)
             c=c+1
         elif(i==3):
             pos=int(input("the the pos = "))
@@ -116,8 +118,9 @@ if __name__=='__main__':
                 l.insp(pos,n)
                 c=c+1
         elif(i==4):
+            l.delll()
+        elif(i==5):
             l.dis()
-        else:
+        elif(i==6):
             print("exit");
             break
-    
