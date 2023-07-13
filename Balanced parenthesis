@@ -1,3 +1,68 @@
+python
+class Node:
+    def __init__(self):
+        self.data = None
+        self.next = None
+class ll:
+    top = None
+
+    @staticmethod
+    def push(num):
+        new_node = Node()
+        new_node.data = num
+        if ll.top is None:
+            ll.top = new_node
+            return
+        new_node.next = ll.top
+        ll.top = new_node
+
+    @staticmethod
+    def pop():
+        temp = ll.top
+        return_char = temp.data
+        # print("Popped: " + temp.data)
+        ll.top = ll.top.next
+        return return_char
+
+    @staticmethod
+    def is_empty():
+        if ll.top is None:
+            return True
+        return False
+
+    @staticmethod
+    def is_balanced(expr):
+        for i in range(len(expr)):
+            x = expr[i]
+            if x == '(' or x == '[' or x == '{':
+                ll.push(x)
+                continue
+            if ll.is_empty():
+                return False
+            check = None
+            if x == ')':
+                check = ll.pop()
+                if check == '{' or check == '[':
+                    return False
+            elif x == '}':
+                check = ll.pop()
+                if check == '(' or check == '[':
+                    return False
+            elif x == ']':
+                check = ll.pop()
+                if check == '(' or check == '{':
+                    return False
+        return ll.is_empty()
+
+
+if __name__ == '__main__':
+    expr = input()
+    if ll.is_balanced(expr):
+        print("Balanced")
+    else:
+        print("Not Balanced")
+==============================================================================================================================================
+
 import java.util.*;
 
 class Node {
