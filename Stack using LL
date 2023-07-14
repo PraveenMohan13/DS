@@ -1,4 +1,34 @@
-Python
+Python STACK USING LIST
+def isEmpty(stack):
+    return len(stack) == 0
+
+def push(stack, item):
+    stack.append(item)
+    
+def pop(stack):
+    if (isEmpty(stack)):
+        raise IndexError("Empty Stack")     
+    return stack.pop()
+
+def peek(stack):
+    if (isEmpty(stack)):
+        raise IndexError("Empty Stack") 
+    return stack[len(stack) - 1]
+
+def dis(stack):
+    if (isEmpty(stack)):
+        raise IndexError("Empty Stack") 
+stack = []
+while(True):
+    i=int(input())
+    if(i<0):
+        break
+    else:
+        push(stack,i)
+print(peek(stack))
+-----------------------------------------------------------------------
+STACK USING LL
+
 class Node:
     def __init__(self, data):
         self.data = data
