@@ -1,4 +1,75 @@
 Tree traversals
+python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class Tree:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        n = Node(data)
+        if self.root is None:
+            self.root = n
+        else:
+            t = self.root
+            while True:
+                if data < t.data:
+                    if t.left is None:
+                        t.left = n
+                        break
+                    else:
+                        t = t.left
+                else:
+                    if t.right is None:
+                        t.right = n
+                        break
+                    else:
+                        t = t.right
+
+    def preorder(self, node):
+        if node is None:
+            return
+        else:
+            print(node.data, end=" ")
+            self.preorder(node.left)
+            self.preorder(node.right)
+
+    def inorder(self, node):
+        if node is None:
+            return
+        else:
+            self.inorder(node.left)
+            print(node.data, end=" ")
+            self.inorder(node.right)
+
+    def postorder(self, node):
+        if node is None:
+            return
+        else:
+            self.postorder(node.left)
+            self.postorder(node.right)
+            print(node.data, end=" ")
+
+if __name__ == "__main__":
+    t = Tree()
+    while(True):
+        n=int(input())
+        if(n<0):
+            break
+        t.insert(n)
+    i = t.root
+    t.preorder(i)
+    print()
+    t.inorder(i)
+    print()
+    t.postorder(i)
+--------------------------------------------------------------------------------------------------------------------
+java
+
 public class tree {
     static class node {
         int data;
