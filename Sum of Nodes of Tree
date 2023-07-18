@@ -25,6 +25,52 @@ Sample Output 1
 
 78
 ----------------------------------------------------------------------
+python
+import sys
+from collections import deque
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = []
+
+def tree(li):
+    i = 0
+    data = li[i]
+    i += 1
+    if data == -1:
+        return None
+    head = Node(data)#box
+    q = deque()#object
+    q.append(head)
+    while q:
+        frontNode = q.pop()
+        noOfChildren = li[i]
+        i += 1
+        for j in range(noOfChildren):
+            data = li[i + j]
+            nn = Node(data)
+            frontNode.next.append(nn)
+            q.append(nn)
+        i += noOfChildren
+    return head
+
+def sum(head):
+    if head is None:
+        return float('-inf')
+    total = 0
+    for i in head.next:
+        total += sum(i)
+    return total + head.data
+
+if __name__ == "__main__":
+    input = input().split()
+    li = [int(x) for x in input]
+    head = tree(li)
+    print(sum(head))
+-============================================================================================================================================================================
+
+java
 import java.util.*;
 import java.io.*;
 
