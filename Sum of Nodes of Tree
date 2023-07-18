@@ -38,8 +38,6 @@ def tree(li):
     i = 0
     data = li[i]
     i += 1
-    if data == -1:
-        return None
     head = Node(data)#box
     q = deque()#object
     q.append(head)
@@ -57,7 +55,7 @@ def tree(li):
 
 def sum(head):
     if head is None:
-        return float('-inf')
+        return 0
     total = 0
     for i in head.next:
         total += sum(i)
