@@ -1,0 +1,81 @@
+You are given the root node of a binary tree.Count the number of nodes present.
+
+Input Format
+
+The first and the only line of input will contain the node data, all separated by a single space. Since -1 is used as an indication whether the left or right node data exist for root, it will not be a part of the node data.
+Constraints
+
+1 <= N <= 10^6
+Where N is the total number of nodes in the binary tree.
+Time Limit: 1 sec
+Output Format
+
+The only line of output prints the number of nodes in Binary Tree
+
+Sample Input 0
+
+1 2 3 4 5 6 7 -1 -1 -1 -1 -1 -1 -1 -1
+Sample Output 0
+
+7
+Sample Input 1
+
+5 6 10 2 3 -1 -1 -1 -1 -1 9 -1 -1
+Sample Output 1
+
+6
+==============================================================================================================================
+from queue import Queue
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+
+def takeInput(li):
+    q = Queue()
+    i = 0
+    if len(li) == 1:
+        return None
+
+    data = li[i]
+    i += 1
+
+
+    root = Node(data)
+    q.put(root)
+
+    while not q.empty():
+        frontNode = q.get()
+
+        data = li[i]
+        i += 1
+
+        if data != -1:
+            nn = Node(data)
+            frontNode.left = nn
+            q.put(nn)
+
+        data = li[i]
+        i += 1
+
+        if data != -1:
+            nn = Node(data)
+            frontNode.right = nn
+            q.put(nn)
+
+    return root
+
+def countNodes(root):
+    if(root == None):
+        return 0
+    ans = 1;
+    ans += countNodes(root.left);
+    ans += countNodes(root.right);
+    return ans;
+if __name__ == "__main__":
+    input = input().split()
+    li = [int(x) for x in input]
+    root = takeInput(li)
+    print(countNodes(root))
