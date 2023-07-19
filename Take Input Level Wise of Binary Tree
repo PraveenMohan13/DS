@@ -26,6 +26,66 @@ Sample Output 1
 4 2 5 1 6 3 7
 
 ------------------------------------------------------------------------
+PYTHON
+from queue import Queue
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+
+def takeInput(li):
+    q = Queue()
+    i = 0
+    if len(li) == 1:
+        return None
+
+    data = li[i]
+    i += 1
+
+
+    root = Node(data)
+    q.put(root)
+
+    while not q.empty():
+        frontNode = q.get()
+
+        data = li[i]
+        i += 1
+
+        if data != -1:
+            nn = Node(data)
+            frontNode.left = nn
+            q.put(nn)
+
+        data = li[i]
+        i += 1
+
+        if data != -1:
+            nn = Node(data)
+            frontNode.right = nn
+            q.put(nn)
+
+    return root
+
+def inorder(root):
+    if root is None:
+        return
+    inorder(root.left)
+    print(root.data, end=" ")
+    inorder(root.right)
+
+
+if __name__ == "__main__":
+    input = input().split()
+    li = [int(x) for x in input]
+    root = takeInput(li)
+    inorder(root)
+=============================================================================================================
+
+JAVA
+
 import java.io.*;
 import java.util.*;
 
