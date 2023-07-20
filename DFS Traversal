@@ -1,0 +1,62 @@
+Given an undirected and disconnected graph G(V, E), print its DFS traversal.
+Note:
+Here you need to consider that you need to print DFS path starting from vertex 0 only.
+V is the number of vertices present in graph G and vertices are numbered from 0 to V-1.
+E is the number of edges present in graph G.
+Take graph input in the adjacency matrix.
+Handle for Disconnected Graphs as well
+Input Format
+
+The first line of input contains two integers, that denote the value of V and E.
+Each of the following E lines contains space separated two integers, that denote that there exists an edge between vertex a and b.
+Constraints
+
+0 <= V <= 1000
+0 <= E <= (V * (V - 1)) / 2
+0 <= a <= V - 1
+0 <= b <= V - 1
+Time Limit: 1 second
+Output Format
+
+Print the DFS Traversal, as described in the task.
+Sample Input 0
+
+4 4
+0 1
+0 3
+1 2
+2 3
+Sample Output 0
+
+0 1 2 3
+Sample Input 1
+
+0 0
+==================================================================
+def print_bfs_helper(li, sv, visited):
+    visited[sv] = True
+    print(sv, end=" ")
+    n = len(li)
+    for i in range(n):
+        if li[sv][i] == 1 and not visited[i]:
+            print_bfs_helper(li, i, visited)
+
+def dfs(li):
+    visited = [False] * len(li)
+    for i in range(len(li)):
+        if not visited[i]:
+            print_bfs_helper(li, i, visited)
+
+if __name__ == "__main__":
+    v, e = map(int, input().split())
+    if v == 0:
+        exit()
+
+    li = [[0 for i in range(v)] for j in range(v)]
+
+    for i in range(e):
+        fv, sv = map(int, input().split())
+        li[fv][sv] = 1
+        li[sv][fv] = 1
+
+    dfs(li)
