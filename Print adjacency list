@@ -1,4 +1,62 @@
 Print adjacency list
+HR
+Write a program to implement the adjacency list
+Input Format
+
+Take input of vertices
+Constraints
+
+No
+Output Format
+
+Show the adjacency list
+Sample Input 0
+
+5
+0 1
+1 2
+2 3
+3 4
+0 4
+Sample Output 0
+
+vertex 0: 1 4 
+vertex 1: 0 2 
+vertex 2: 1 3 
+vertex 3: 2 4 
+vertex 4: 3 0
+=============================================================================================================================
+class Graph:
+    def __init__(self, V):
+        self.V = V
+        self.next = {i: [] for i in range(V)}
+
+    def add_edge(self, src, dest):
+        self.next[src].append(dest)
+        self.next[dest].append(src)  
+        
+    def print_adj_list(self):
+        for v in range(self.V):
+            print(f"The Adjacency list of vertex {v} is:")
+            for neighbor in self.next[v]:
+                print(f"{neighbor} -> ", end="")
+            print("None")
+            print("\n")
+
+
+V = int(input())
+E = int(input())
+
+g = Graph(V)
+for _ in range(E):
+    src, dest = map(int, input().split())
+    g.add_edge(src, dest)
+
+g.print_adj_list()
+
+
+=====================================================================
+face
 Given the number of edges 'E' and vertices 'V' of a bidirectional graph. Your task is to build a graph through the adjacency list and print the adjacency list for each vertex.
 
 
