@@ -57,7 +57,25 @@ Adjacency Matrix Representation:
 
 0 0 0 0
 ------------------------------------------------------------------------------------------------------------
+def printadjmatrix(A,rows):
+    for i in range(rows):
+        for j in range(rows):
+            print(A[i][j],end=" ")
+        print()         
+rows=int(input())
+edges=int(input())
+directed=input()
+A=[[0 for x in range(rows)] for y in range(rows)]
 
+for i in range(edges):
+    snode, enode, weight =[int(x) for x in input().split()]
+    if directed=="yes":
+        A[snode][enode]=weight;
+    else:
+        A[snode][enode]=weight;
+        A[enode][snode]=weight;
+printadjmatrix(A,rows)
+===================================================
 
 import java.util.*;
 import java.lang.*;
