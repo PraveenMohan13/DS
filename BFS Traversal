@@ -33,6 +33,42 @@ Sample Input 1
 
 0 0
 ---------------------------------------------------------------------------------------------------------------------------------
+from collections import deque
+
+def print_bfs_helper(li, sv, visited):
+    queue = deque()
+    visited[sv] = True
+    queue.append(sv)
+    
+    while queue:
+        front = queue.popleft()
+        print(front, end=" ")
+        
+        for i in range(len(li)):
+            if li[front][i] == 1 and not visited[i]:
+                visited[i] = True
+                queue.append(i)
+
+def print_bfs(li):
+    visited = [False] * len(li)
+    for i in range(len(li)):
+        if not visited[i]:
+            print_bfs_helper(li, i, visited)
+
+if __name__ == "__main__":
+    n, e = map(int, input().split())
+    if n == 0:
+        exit()
+
+    li = [[0 for _ in range(n)] for _ in range(n)]
+
+    for _ in range(e):
+        fv, sv = map(int, input().split())
+        li[fv][sv] = 1
+        li[sv][fv] = 1
+
+    print_bfs(li)
+============================================================================================
 import java.util.*;
 
   class Main
