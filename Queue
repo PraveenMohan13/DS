@@ -1,3 +1,70 @@
+Python 
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.front = None
+        self.rear = None
+
+    def enqueue(self, n):
+        new_node = Node(n)
+        if self.front is None and self.rear is None:
+            self.front = new_node
+            self.rear = new_node
+        else:
+            self.rear.next = new_node
+            self.rear = new_node
+
+    def dequeue(self):
+        if self.front is None:
+            raise Exception("Empty Stack")
+        else:
+            self.front = self.front.next
+
+    def poll(self):
+        if self.front is None:
+            raise Exception("Empty Stack")
+        else:
+            print(self.front.data)
+            self.front = self.front.next
+
+    def peek(self):
+        if self.front is None:
+            raise Exception("Empty Stack")
+        else:
+            print(self.front.data)
+
+    def display(self):
+        if self.front is None and self.rear is None:
+            raise Exception("Empty Stack")
+        else:
+            temp = self.front
+            while temp is not None:
+                print(temp.data, end=" ")
+                temp = temp.next
+            print("NULL")
+
+if __name__ == "__main__":
+    l = LinkedList()
+    while True:
+        i = int(input())
+        if i < 0:
+            break
+        l.enqueue(i)
+
+    l.display()
+    l.dequeue()
+    l.display()
+    l.peek()
+    l.display()
+    l.poll()
+    l.display()
+=================================================================================================
+
+
 import java.util.*;
 class Node {
     int data;
