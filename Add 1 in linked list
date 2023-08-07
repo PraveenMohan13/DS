@@ -1,0 +1,140 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct Node
+{
+	int data;
+	struct Node* next;
+};
+
+/*create a new node with given data */
+struct Node* newNode(int data)
+{
+	struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+	new_node->data = data;
+	new_node->next = NULL;
+	return new_node;
+}
+
+/*reverse the linked list */
+struct Node* reverse(struct Node* head)
+{
+	struct Node* prev = NULL;
+	struct Node* current = head;
+	struct Node* next;
+
+	while (current != NULL)
+	{
+		next = current->next;
+		current->next = prev;
+		prev = current;
+		current = next;
+	}
+	return prev;
+}
+
+/* Adds one to a linked lists and return the head
+node of the resultant list */
+struct Node* addOneUtil(struct Node* head)
+{
+	// res is the head node of the resultant list
+	struct Node* res = head;
+	struct Node* temp;
+	int carry = 1, sum;
+
+	while (head != NULL) // while the list exists
+	{
+		// Calculate the value of the next digit in the resultant list.
+		// The next digit is the sum of the following things
+		// (i) Carry
+		// (ii) Next digit of head list (if there is a
+		//	 next digit)
+		sum = carry + head->data;
+
+		// update carry for the next calculation
+		carry = (sum >= 10) ? 1 : 0;
+
+		// update sum if it is greater than 10
+		sum = sum % 10;
+
+		// Create a new node with sum as data
+		head->data = sum;
+
+		// Move head pointer to the next node
+		temp = head;
+		head = head->next;
+	}
+
+	// if some carry is still there, add a new node to
+	// the result list.
+	if (carry > 0)
+		temp->next = newNode(carry);
+
+	// return head of the resultant list
+	return res;
+}
+
+// This function mainly uses addOneUtil().
+struct Node* addOne(struct Node* head)
+{
+	// Reverse the linked list
+	head = reverse(head);
+
+	// Add one from left to right of reversed
+	// list
+	head = addOneUtil(head);
+
+	// Reverse the modified list again to get the original order
+	return reverse(head);
+}
+
+// A utility function to print a linked list
+void printList(struct Node* node)
+{
+	while (node != NULL)
+	{
+		printf("%d", node->data);
+		node = node->next;
+	}
+	printf("\n");
+}
+
+int main(void)
+{
+	struct Node* head = NULL;
+	struct Node* prev = NULL;
+	int n, data;
+
+	scanf("%d", &n);
+
+	for (int i = 0; i < n; i++)
+	{
+		scanf("%d", &data);
+		struct Node* node = newNode(data);
+		if (!head)
+		{
+			head = node;
+		}
+		if (prev)
+		{
+			prev->next = node;
+		}
+		prev = node;
+	}
+
+	printList(head);
+
+	head = addOne(head);
+
+	printList(head);
+
+	// Free allocated memory for the linked list
+	struct Node* temp;
+	while (head)
+	{
+		temp = head;
+		head = head->next;
+		free(temp);
+	}
+    
+	return 0;
+}
