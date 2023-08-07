@@ -93,6 +93,81 @@ public class Solution {
         
         System.out.println();
     }
+=========================================================================================================================
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    int data;
+    struct node* next;
+};
+
+struct node* newNode(int data) {
+    struct node* new_node = (struct node*)malloc(sizeof(struct node));
+    new_node->data = data;
+    new_node->next = NULL;
+    return new_node;
+}
+
+struct node* takeInput() {
+    struct node* head = NULL;
+    struct node* tail = NULL;
+    int data;
+
+    printf("Enter elements (Enter -1 to stop): ");
+    while (1) {
+        scanf("%d", &data);
+        if (data == -1)
+            break;
+
+        struct node* newnode = newNode(data);
+        if (head == NULL) {
+            head = newnode;
+            tail = newnode;
+        } else {
+            tail->next = newnode;
+            tail = newnode;
+        }
+    }
+    return head;
+}
+
+void deleteAlternateNodes(struct node* head) {
+    struct node* cur = head;
+    struct node* cur1;
+
+    while (cur != NULL && cur->next != NULL) {
+        cur1 = cur->next;
+        cur->next = cur1->next;
+        free(cur1);
+        cur = cur->next;
+    }
+}
+
+void print(struct node* head) {
+    while (head != NULL) {
+        printf("%d ", head->data);
+        head = head->next;
+    }
+    printf("\n");
+}
+
+void freeLinkedList(struct node* head) {
+    struct node* temp;
+    while (head != NULL) {
+        temp = head;
+        head = head->next;
+        free(temp);
+    }
+}
+
+int main() {
+    struct node* head = takeInput();
+    deleteAlternateNodes(head);
+    print(head);
+    freeLinkedList(head);
+    return 0;
+}
 
 
     public static void main(String[] args) {
