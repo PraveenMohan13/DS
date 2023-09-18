@@ -82,6 +82,156 @@ public class Solution {
     }
 }
 ------------------------------------------------------------------------------------------------------------
+
+public class Solution {
+
+    Node head;
+    Node temp;
+    class Node
+    {
+        int data;
+        Node next;
+        Node(int data)
+        {
+            this.data=data;
+            this.next=null;
+        }
+    }
+    void ins(int data)
+    {
+        Node nn=new Node(data);
+        if(head==null)
+        {
+            head=nn;
+            temp=nn;
+        }
+        else
+        {
+            temp.next=nn;
+            temp=nn;
+        }
+    }
+    
+    Node rev()
+    {
+        Node pre=null;
+        Node cur;
+        Node nxt;
+        cur=head;
+        while(cur !=null)
+        {
+            nxt=cur.next;
+            cur.next=pre;
+            pre=cur;
+            cur=nxt; 
+        }
+       return pre; 
+    }
+    
+    void dis(Node head)
+    {
+        temp=head;
+        while(temp!=null)
+        {
+            System.out.print(temp.data+" ");
+            temp=temp.next;
+        }  
+    }
+    public static void main(String[] args) {
+        Scanner z=new Scanner(System.in);
+        Solution s=new Solution();
+        while(true)
+        {
+            int n=z.nextInt();
+                if(n!=-1)
+                  s.ins(n);
+                else
+                    break;
+        }
+       Node head=s.rev();
+        s.dis(head);
+      
+    }
+}
+
+=====================================================================================================================
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    static Node head;
+    Node temp;
+    class Node
+    {
+        int data;
+        Node next;
+        Node(int data)
+        {
+            this.data=data;
+            this.next=null;
+        }
+    }
+    void ins(int data)
+    {
+        Node nn=new Node(data);
+        if(head==null)
+        {
+            head=nn;
+            temp=nn;
+        }
+        else
+        {
+            temp.next=nn;
+            temp=nn;
+        }
+    }
+    
+    Node rev()
+    {
+        Node pre=null;
+        Node cur;
+        Node nxt;
+        cur=head;
+        while(cur !=null)
+        {
+            nxt=cur.next;
+            cur.next=pre;
+            pre=cur;
+            cur=nxt; 
+        }
+       return pre; 
+    }
+    
+    void dis()
+    {
+        temp=head;
+        while(temp!=null)
+        {
+            System.out.print(temp.data+" ");
+            temp=temp.next;
+        }  
+    }
+    public static void main(String[] args) {
+        Scanner z=new Scanner(System.in);
+        Solution s=new Solution();
+        while(true)
+        {
+            int n=z.nextInt();
+                if(n!=-1)
+                  s.ins(n);
+                else
+                    break;
+        }
+       head=s.rev();
+        s.dis();
+      
+    }
+}
+=========================================================================================================================
 import java.io.*;
 import java.util.*;
 
