@@ -163,3 +163,73 @@ public class Solution {
     
     }
 }
+===============================================================================
+import java.io.*;
+import java.util.*;
+
+class node
+{
+    int data;
+    node next;
+    node(int data)
+    {
+        this.data=data;
+        next=null;
+    }
+}
+
+class ll
+{
+    node head;
+    node temp;
+    void ins(int data)
+    {
+        node nn=new node(data);
+        node t=head;
+        while(t!=null)
+        {
+            if(t.data==data)
+                return;
+            t=t.next;
+        }
+        if(head==null)
+        {
+            head=nn;
+            temp=nn;
+        }
+        else
+        {
+            temp.next=nn;
+            temp=nn;
+        }
+    }
+    
+    void dis()
+    {
+        temp=head;
+        while(temp!=null)
+        {
+            System.out.print(temp.data+" ");
+            temp=temp.next;
+        }
+            
+    }    
+}
+
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner z=new Scanner(System.in);
+        ll l=new ll();
+        while(true)
+        {
+            int data=z.nextInt();
+            if(data==-1)
+                break;
+            else
+                l.ins(data);
+        }
+        l.dis();
+
+    }
+}
