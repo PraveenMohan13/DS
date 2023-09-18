@@ -1,0 +1,104 @@
+Given a singly linked list of integers and an integer n, find and return the index for the first occurrence of 'n' in the linked list. -1 otherwise.
+Note : Assume that the Indexing for the linked list always starts from 0.
+Input Format
+
+The first line of each test case or query contains the elements of the singly linked list separated by a single space.
+The second line of input contains a single integer depicting the value of 'n'.
+Remember/Consider :
+While specifying the list elements for input, -1 indicates the end of the singly linked list and hence, would never be a list element
+Constraints
+
+0 <= M <= 10^5
+Where M is the size of the singly linked list.
+Time Limit: 1sec
+Output Format
+
+Output for every test case will be printed in a seperate line.
+Sample Input 0
+
+3 4 5 2 6 1 9 -1
+100
+Sample Output 0
+
+-1
+Sample Input 1
+
+10 20010 30 400 600 -1
+20010
+Sample Output 1
+
+1
+
+====================================================================================================================
+import java.io.*;
+import java.util.*;
+
+class node
+{
+    int data;
+    node next;
+    node(int data)
+    {
+        this.data=data;
+        next=null;
+    }
+}
+
+class ll
+{
+    node head;
+    node temp;
+    void ins(int data)
+    {
+        node newnode=new node(data);
+        if(head==null)
+        {
+            head=newnode;
+            temp=newnode;
+        }
+        else
+        {
+            temp.next=newnode;
+            temp=newnode;
+        }
+    }
+    void find(int key)
+    {
+        temp=head;
+        int c=0,f=0;
+        while(temp!=null)
+        {
+            if(temp.data==key)
+            {
+                f=1;
+                break;
+            }
+            else
+                c++;
+            temp=temp.next;
+        }
+        if(f==0)
+             System.out.print("-1");
+        else
+             System.out.print(c);
+    }
+}
+    
+    
+    
+public class Solution {
+    public static void main(String[] args) {
+        ll l=new ll();
+        Scanner z=new Scanner(System.in);
+        while(true)
+        {
+            int data=z.nextInt();
+            if(data==-1)
+                break;
+            else
+                l.ins(data);
+        }
+        int key=z.nextInt();
+        l.find(key);
+    }
+}
