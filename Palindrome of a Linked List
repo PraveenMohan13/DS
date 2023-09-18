@@ -1,0 +1,118 @@
+You have been given a head to a singly linked list of integers. Write a function check to whether the list given is a 'Palindrome' or not.
+
+Input Format
+
+First and the only line of each test case or query contains the the elements of the singly linked list separated by a single space.
+Remember/Consider :
+While specifying the list elements for input, -1 indicates the end of the singly linked list and hence, would never be a list element.
+Constraints
+
+0 <= M <= 10^5
+Time Limit: 1sec
+Where 'M' is the size of the singly linked list.
+Output Format
+
+For each test case, the only line of output that print 'true' if the list is Palindrome or 'false' otherwise.
+Sample Input 0
+
+9 2 3 3 2 9 -1
+Sample Output 0
+
+true
+Sample Input 1
+
+-1
+Sample Output 1
+
+true
+===================================================================================================================================
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    Node ohead;
+    Node otemp;
+    Node ehead;
+    Node etemp;
+    class Node
+    {
+        int data;
+        Node next;
+        Node(int data)
+        {
+            this.data=data;
+            this.next=null;
+        }
+    }
+    void l1(int data)
+    {
+        Node nn=new Node(data);
+        if(ohead==null)
+        {
+            ohead=nn;
+            otemp=nn;
+        }
+        else
+        {
+            otemp.next=nn;
+            otemp=nn;
+        }
+    }
+    void l2(int data)
+    {
+        Node nn=new Node(data);
+        if(ehead==null)
+        {
+            ehead=nn;
+        }
+        else
+        {
+            nn.next=ehead;
+            ehead=nn;
+        }
+    }
+
+    void dis()
+    {
+        int f=0;
+        otemp=ohead;
+        etemp=ehead;
+        
+        while(otemp!=null)
+        {
+            if(otemp.data!=etemp.data)
+            {
+                f=1;
+                break;
+            }
+            otemp=otemp.next;
+            etemp=etemp.next;
+        }  
+        if(f==0)
+            System.out.print("true");
+        else
+            System.out.print("false");
+            
+    }
+    public static void main(String[] args) {
+        Scanner z=new Scanner(System.in);
+        Solution s=new Solution();
+        while(true)
+        {
+            int n=z.nextInt();
+                if(n!=-1)
+                {
+                    s.l1(n);
+                    s.l2(n);
+                } 
+                else
+                    break;
+        }
+        s.dis();
+      
+    }
+}
