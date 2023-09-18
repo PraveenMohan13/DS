@@ -1,0 +1,113 @@
+Given a singly linked list of integers and position 'i', delete the node present at the 'i-th' position in the linked list recursively.
+Note : Assume that the Indexing for the linked list always starts from 0.
+Input Format
+
+The first line of each test case or query contains the elements of the singly linked list separated by a single space.
+The second line of input contains a single integer depicting the value of 'i'.
+Constraints
+
+Time:- 1sec
+Output Format
+
+Output will be printed in a seperate line.
+Sample Input 0
+
+3 4 5 2 6 1 9 -1
+3 100
+Sample Output 0
+
+3 4 5 100 2 6 1 9
+Sample Input 1
+
+3 4 5 2 6 1 9 -1
+0 20
+Sample Output 1
+
+20 3 4 5 2 6 1 9
+=======================================================================================================================================
+import java.io.*;
+import java.util.*;
+
+class node
+{
+    int data;
+    node next;
+    node(int data)
+    {
+        this.data=data;
+        next=null;
+    }
+}
+
+class ll
+{
+    node head;
+    node temp;
+    void ins(int data)
+    {
+        node newnode=new node(data);
+        if(head==null)
+        {
+            head=newnode;
+            temp=newnode;
+        }
+        else
+        {
+            temp.next=newnode;
+            temp=newnode;
+        }
+    }
+    void fix(int key,int pos,int c)
+    {
+        if(pos>c)
+            return;
+        node newnode=new node(key);
+        if(pos==0)
+        {
+            newnode.next=head;
+            head=newnode;
+            return;
+        }
+        temp=head;
+        for(int i=0;i<pos-1;i++)
+        {
+            temp=temp.next;
+        }
+        newnode.next=temp.next;
+        temp.next=newnode;
+    }
+    void dis()
+    {
+        temp=head;
+        while(temp!=null)
+        {
+            System.out.print(temp.data+" ");
+            temp=temp.next;
+        }
+    }
+}
+    
+    
+    
+public class Solution {
+    public static void main(String[] args) {
+        ll l=new ll();
+        Scanner z=new Scanner(System.in);
+        int c=0;
+        while(true)
+        {
+            int data=z.nextInt();
+            if(data==-1)
+                break;
+            else
+            {
+                l.ins(data);
+                c++;
+            }
+        }
+        int pos=z.nextInt();
+        int key=z.nextInt();        
+        l.fix(key,pos,c);
+        l.dis();
+    }
+}
