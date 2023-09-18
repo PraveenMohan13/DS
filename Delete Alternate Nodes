@@ -28,72 +28,86 @@ Sample Output 1
 
 10 30 50 70
 ---------------------------------------------------------------------------------------
+
 import java.io.*;
 import java.util.*;
 
-class node
-{
-    int data;
-    node next;
-    
-    node(int data)
-    {
-        this.data = data;
-        next = null;
-    }
-}
-
-
 public class Solution {
     
-    public static node takeInput() 
+    node head=null;
+    node temp=null;
+    class node
     {
-
-        node head = null, tail = null;
-        Scanner s = new Scanner(System.in);
-        int data = s.nextInt();
-
-        while(data != -1) 
+        int data;
+        node next=null;
+        node(int data)
         {
-            node newnode = new node(data);
-            if (head == null) 
-            {
-                head = newnode;
-                tail = newnode;
-
-            } else 
-            {
-                tail.next = newnode;
-                tail = newnode;
-            }
-            data = s.nextInt();
+            this.data=data;
+            next=null;
         }
-        return head;
     }
-
-    public static void deleteAlternateNodes(node head) {
-        node cur = head;
-        node cur1;
-        
-        while(cur != null && cur.next != null){
-            cur1 = cur.next;
-            cur.next = cur1.next;
-            cur = cur.next;
-            
+    void ins(int data)
+    {
+        node newnode=new node(data);
+        if(head==null)
+        {
+            head=newnode;
+            temp=newnode;
+        }
+        else
+        {
+            temp.next=newnode;
+            temp=newnode;
         }
     }
     
-    public static void print(node head)
+    void del()
     {
-        while(head != null)
+        if(head.next==null)
+            return;
+        else
         {
-            System.out.print(head.data + " ");
-            head = head.next;
+            node f=head;
+            node s;
+            
+            while(f!=null&&f.next!=null)
+            {
+                s=f.next;
+                f.next=s.next;
+                f=f.next;
+            }  
         }
-        
-        System.out.println();
+    }  
+    void dis()
+    {
+        temp=head;
+        while(temp !=null)
+        {
+            System.out.print(temp.data+" ");
+            temp=temp.next;
+        }
     }
-=========================================================================================================================
+
+    public static void main(String[] args) {
+        
+        Scanner z=new Scanner(System.in);
+        Solution o=new Solution();
+        while(true)
+        {
+            int data=z.nextInt();
+            if(data==-1)
+                break;
+            else
+                o.ins(data);
+        }
+        o.del();
+        o.dis();
+        
+        
+    }
+}
+==========================================================================================================
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -176,3 +190,76 @@ int main() {
         print(head);
     }
 }
+
+=========================================================================================================================
+
+
+
+
+
+
+import java.io.*;
+import java.util.*;
+
+class node
+{
+    int data;
+    node next;
+    
+    node(int data)
+    {
+        this.data = data;
+        next = null;
+    }
+}
+
+
+public class Solution {
+    
+    public static node takeInput() 
+    {
+
+        node head = null, tail = null;
+        Scanner s = new Scanner(System.in);
+        int data = s.nextInt();
+
+        while(data != -1) 
+        {
+            node newnode = new node(data);
+            if (head == null) 
+            {
+                head = newnode;
+                tail = newnode;
+
+            } else 
+            {
+                tail.next = newnode;
+                tail = newnode;
+            }
+            data = s.nextInt();
+        }
+        return head;
+    }
+
+    public static void deleteAlternateNodes(node head) {
+        node cur = head;
+        node cur1;
+        
+        while(cur != null && cur.next != null){
+            cur1 = cur.next;
+            cur.next = cur1.next;
+            cur = cur.next;
+            
+        }
+    }
+    
+    public static void print(node head)
+    {
+        while(head != null)
+        {
+            System.out.print(head.data + " ");
+            head = head.next;
+        }
+        
+        System.out.println();
+    }
