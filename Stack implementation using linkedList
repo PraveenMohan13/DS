@@ -1,3 +1,4 @@
+
 Python STACK USING LIST
 def isEmpty(stack):
     return len(stack) == 0
