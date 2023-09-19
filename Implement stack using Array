@@ -1,0 +1,90 @@
+Write a program to implement stack using Array. Implement all the stack related functions - push, pop. print stack.
+
+Input Format
+
+Input consists of
+n = Total number of operations
+String - Operation to be performed
+Integer - Elements of stack > 0
+Constraints
+
+No
+
+Output Format
+
+Output consists of Integer.
+
+Sample Input 0
+
+10
+Push
+1
+Pop
+Push
+5
+Push
+2
+Pop
+Push
+7
+Push
+9
+Push
+10
+Pop
+Print
+Sample Output 0
+
+5
+7
+9
+Sample Input 1
+
+5
+Push
+10
+Push
+20
+Push
+30
+Pop
+Print
+Sample Output 1
+
+10
+20
+===================================================================================================================================
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        
+        Scanner z=new Scanner(System.in);
+        int n=z.nextInt();
+        int a[]=new int[n];
+        String ch;
+        int data,c=0;
+        while(n>0)
+        {
+            ch=z.next();
+            switch(ch)
+            {
+                case "Push":
+                    data=z.nextInt();
+                    a[c++]=data;
+                    break;
+                case "Pop":
+                    c--;
+                    break;
+                case "Print":
+                    for(int i=0;i<c;i++)
+                        System.out.println(a[i]);
+                    break;                   
+            }
+            n--;
+        }
+        
+    }
+}
