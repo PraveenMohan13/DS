@@ -1,3 +1,70 @@
+For a given a string expression containing only round brackets or parentheses, check if they are balanced or not. Brackets are said to be balanced if the bracket which opens last, closes first.
+
+Input Format
+
+Expression: (()())
+Since all the opening brackets have their corresponding closing brackets, we say it is balanced and hence the output will be, 'true'.
+You need to return a boolean value indicating whether the expression is balanced or not.
+Note:
+The input expression will not contain spaces in between.
+Constraints
+
+1 <= N <= 10^7
+Where N is the length of the expression.
+Time Limit: 1sec
+Output Format
+
+The only line of output prints 'true' or 'false'.
+Sample Input 0
+
+(()()())
+Sample Output 0
+
+true
+Sample Input 1
+
+()()(()
+Sample Output 1
+
+false
+===========================================================================================================
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) {
+        Solution o=new Solution();
+        Scanner z=new Scanner(System.in);
+        String data=z.next();
+        int n=data.length();
+        char a[]=new char[n];
+        int top=-1;
+        for(int i=0;i<n;i++)
+        {
+            char ch=data.charAt(i);//check
+            if(ch=='{'||ch=='('||ch=='[')
+                a[++top]=ch;
+            else
+            {
+                if(top==-1)
+                {
+                    System.out.println("false");
+                    return ;
+                }   
+                char cpop=a[top];
+                if(ch==')'&&cpop=='('||ch==']'&&cpop=='['||ch=='}'&&cpop=='{')
+                    top--;
+                else
+                    System.out.println("false");
+            } 
+        }
+        if(top==-1)
+            System.out.print("true");
+        else
+            System.out.print("false");
+    }    
+}
+======================================================================================================
 python
 class Node:
     def __init__(self):
@@ -23,14 +90,10 @@ class ll:
         # print("Popped: " + temp.data)
         ll.top = ll.top.next
         return return_char
-
-    @staticmethod
     def is_empty():
         if ll.top is None:
             return True
         return False
-
-    @staticmethod
     def is_balanced(expr):
         for i in range(len(expr)):
             x = expr[i]
