@@ -1,0 +1,113 @@
+Write a program to implement Queue using array.
+Input Format
+
+First Line array size
+Second line array elements
+Constraints
+
+No
+Output Format
+
+Print the elements from queue
+Sample Input 0
+
+5
+1 2 3 4 5
+Sample Output 0
+
+1 2 3 4 5
+Sample Input 1
+
+3
+1 2 3
+Sample Output 1
+
+1 2 3
+=================================================================================================
+import java.util.Scanner;
+
+class solution {
+    int maxSize;
+    int front;
+    int rear;
+    int[] queueArray;
+
+    public solution(int size) {
+        maxSize = size;
+        front = 0;
+        rear = -1;
+        queueArray = new int[maxSize];
+    }
+    public boolean isEmpty() {
+        return (rear == -1);
+    }
+
+    public boolean isFull() {
+        return (rear == maxSize - 1);
+    }
+
+    public void enqueue(int item) {
+        if (isFull()) {
+            System.out.println("Queue is full. Cannot enqueue more items.");
+        } else {
+            queueArray[++rear] = item;
+        }
+    }
+
+    public int dequeue() {
+        if (isEmpty()) {
+            System.out.println("Queue is empty. Cannot dequeue.");
+            return -1; // You can choose a different value to indicate an error.
+        } else {
+            int item = queueArray[front++];
+            if (front > rear) {
+                front = 0;
+                rear = -1;
+            }
+            return item;
+        }
+    }
+
+    public void printQueue() {
+        if (isEmpty()) {
+            System.out.println("Queue is empty.");
+        } else {
+            for (int i = front; i <= rear; i++) {
+                System.out.print(queueArray[i] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int arraySize = scanner.nextInt();
+        solution q = new solution(arraySize);
+
+        for (int i = 0; i < arraySize; i++) {
+            int element = scanner.nextInt();
+            q.enqueue(element);
+        }
+
+        q.printQueue();
+    }
+}
+=================================================================================
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner z=new Scanner(System.in);
+        int n=z.nextInt();
+        int a[]=new int[n];
+        for(int i=0;i<n;i++)
+            a[i]=z.nextInt();
+        for(int i=0;i<n;i++)
+            System.out.print(a[i]+" ");
+    }
+}
