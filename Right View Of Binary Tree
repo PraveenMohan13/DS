@@ -1,0 +1,99 @@
+You have been given a Binary Tree of integers.
+Your task is to print the Right view of it.
+The right view of a Binary Tree is a set of nodes visible when the tree is viewed from the Right side and the nodes are printed from top to bottom order.
+Input Format
+
+The only line of input contains the elements of the tree in the level order form separated by a single space.
+If any node does not have left or right child, take -1 in its place. Refer to the example below.
+Constraints
+
+Time:- 1 Sec
+
+Output Format
+
+Output for every test case will be in a separate line.
+
+Sample Input 0
+
+2 35 10 2 3 5 2 -1 -1 -1 -1 -1 -1 -1 -1
+Sample Output 0
+
+2 10 2
+Sample Input 1
+
+1 2 -1 3 -1 4 -1 5 -1 -1 -1
+Sample Output 1
+
+1 2 3 4 5
+
+===============================================================================================================================================================================
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+     class node
+    {
+        int data;
+        node left;
+        node right;
+        node(int data)
+        {
+            this.data=data;
+        }
+        
+    }
+    
+     node ins(String[] s)
+    {
+        int i=0,data;
+        node head,temp;
+        Queue<node> q=new LinkedList<>();
+        data=Integer.parseInt(s[i++]);
+        head=new node(data);
+        q.add(head);
+        while(!q.isEmpty())
+        {
+            temp=q.poll();
+            data=Integer.parseInt(s[i++]);
+            if(data!=-1)
+            {
+                temp.left=new node(data);
+                q.add(temp.left);
+            }
+            data=Integer.parseInt(s[i++]);
+            if(data!=-1)
+            {
+                temp.right=new node(data);
+                q.add(temp.right);
+            }
+        }
+        return head;
+    }
+    
+    
+     List<Integer> count(node head,int a,List<Integer> ds)
+    {
+        if(head==null)
+            return null;
+        if(ds.size()==a)
+            ds.add(head.data);
+        count(head.right,a+1,ds);
+        count(head.left,a+1,ds);
+        return ds;
+    }
+
+    public static void main(String[] args) {
+        Solution x=new Solution();
+        Scanner z=new Scanner(System.in);
+        String[] s=z.nextLine().split(" ");
+        node head=x.ins(s);
+        List<Integer> ds=new ArrayList<Integer>();
+        x.count(head,0,ds);
+        for (int i:ds)
+        System.out.print(i+" ");
+        
+    }
+}
