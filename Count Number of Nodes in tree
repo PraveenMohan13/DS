@@ -79,3 +79,125 @@ if __name__ == "__main__":
     li = [int(x) for x in input]
     root = takeInput(li)
     print(countNodes(root))
+======================================================================================================================================================
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    static class node
+    {
+        int data;
+        node left;
+        node right;
+        node(int data)
+        {
+            this.data=data;
+            left=null;
+            right=null;
+        }
+    }
+    public static void main(String[] args) {
+       Scanner z=new Scanner(System.in);
+        Queue<node> q=new LinkedList<>();
+        
+        String[] s=z.nextLine().split(" ");
+        
+        int i=0,data,c=1;
+        node nn,head,temp;
+        
+        data=Integer.parseInt(s[i++]);
+        nn=new node(data);
+        q.add(nn);
+        head=nn;
+        
+        while(!q.isEmpty())
+        {
+            temp=q.poll();
+            data=Integer.parseInt(s[i++]);
+            if(data!=-1)
+            {
+                temp.left=new node(data);
+                q.add(temp.left);
+                c++;
+            }
+            
+            data=Integer.parseInt(s[i++]);
+            if(data!=-1)
+            {
+                temp.right=new node(data);
+                q.add(temp.right);
+                c++;
+            }
+        }
+        System.out.print(c);
+    }
+}
+======================================================================================================================================
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    static class node
+    {
+        int data;
+        node left;
+        node right;
+        node(int data)
+        {
+            this.data=data;
+            left=null;
+            right=null;
+        }
+    }
+     static int count(node head)
+     {
+         if(head==null)
+             return 0;
+         int c=1;
+         c=c+count(head.left);
+         c=c+count(head.right);
+         return c;
+     }
+
+    public static void main(String[] args) {
+       Scanner z=new Scanner(System.in);
+        Queue<node> q=new LinkedList<>();
+        
+        String[] s=z.nextLine().split(" ");
+        
+        int i=0,data,c=1;
+        node nn,head,temp;
+        
+        data=Integer.parseInt(s[i++]);
+        nn=new node(data);
+        q.add(nn);
+        head=nn;
+        
+        while(!q.isEmpty())
+        {
+            temp=q.poll();
+            data=Integer.parseInt(s[i++]);
+            if(data!=-1)
+            {
+                temp.left=new node(data);
+                q.add(temp.left);
+                c++;
+            }
+            
+            data=Integer.parseInt(s[i++]);
+            if(data!=-1)
+            {
+                temp.right=new node(data);
+                q.add(temp.right);
+                c++;
+            }
+        }
+        System.out.print(count(head));
+    }
+}
