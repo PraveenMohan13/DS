@@ -88,75 +88,64 @@ JAVA
 
 import java.io.*;
 import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
 
-public class Solution 
-{       
-        
-   static class node
+public class Solution {
+    static class node
     {
         int data;
         node left;
-        node right; 
-    node(int data)
-    {
-        this.data=data;
-        left=null;
-        right=null;
-    }
-    }
- 
-    public static void inorder(node root) 
-    {
-
-        if(root == null) 
+        node right;
+        node(int data)
         {
-            return;
+            this.data=data;
+            left=null;
+            right=null;
+            
         }
-        inorder(root.left);
-        System.out.print(root.data + " ");
-        inorder(root.right);
     }
     
-
-    
-    public static void main(String[] args)throws IOException 
+    static void dis(node head)
     {
+        if(head==null)
+            return ;
+        dis(head.left);
+        System.out.print(head.data+" ");
+        dis(head.right);     
+    }
     
-        Queue<node> q = new LinkedList<>();
-        Scanner z=new Scanner(System.in);
-        String[] s = z.nextLine().split(" ");
-        
-        int i=0;
-            int n=Integer.parseInt(s[i]);
-        i++;
-        node nn = new node(n);
-            q.add(nn);
-        node head=nn;
+    
 
+    public static void main(String[] args) {
+        Queue<node> q=new LinkedList<>();
+        Scanner z=new Scanner(System.in);
+        
+        String[] s=z.nextLine().split(" ");
+        int i=0,data;
+        node root,head;
+        
+        data=Integer.parseInt(s[i++]);
+        node nn=new node(data);
+        head=nn;
+        q.add(nn);
         while(!q.isEmpty())
         {
-            node currentNode;
-            currentNode =  q.poll();
-            int leftChildData = Integer.parseInt(s[i]);
-            i++;
-
-            if(leftChildData != -1)
+            root=q.poll();
+            data=Integer.parseInt(s[i++]);
+            if(data!=-1)
             {
-                node leftChild = new node(leftChildData);
-                currentNode.left = leftChild;
-                q.add(leftChild);
+                root.left=new node(data);
+                q.add(root.left);
             }
-
-            int rightChildData = Integer.parseInt(s[i]);
-            i++;
-
-            if(rightChildData != -1)
+            data=Integer.parseInt(s[i++]);
+            if(data!=-1)
             {
-                node rightChild = new node(rightChildData);
-                currentNode.right = rightChild;
-                q.add(rightChild);
+                root.right=new node(data);
+                q.add(root.right);
             }
         }
-         inorder(head);
+        dis(head);      
     }
 }
