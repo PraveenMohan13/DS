@@ -102,3 +102,63 @@ public class Solution {
             System.out.print(ans);
     }
 }
+====================================================================
+import java.util.*;
+class Main
+{
+  node head,temp;
+  class node
+  {
+    int data;
+    node next;
+    node(int n)
+    {
+      data=n;
+    }
+  }
+     void ins(int data)
+    {
+      node nn=new node(data);
+      if(head==null)
+      {
+        head=nn;
+        temp=nn;
+      }
+      else
+      {
+        temp.next=nn;
+        temp=nn;
+        }
+      }
+  void max()
+    {
+    temp=head;
+    if(head==null)
+    {
+      System.out.println("List is empty");
+      return;
+    }
+    int max=Integer.MIN_VALUE;
+    while(temp!=null)
+    {
+      if(max<=temp.data)
+        max=temp.data;
+      temp=temp.next;
+    }
+    System.out.println(max);
+  }
+    
+  public static void main(String args[])
+  {
+   Scanner z=new Scanner(System.in);
+    Main o = new Main();
+    while(true)
+    {
+      int n=z.nextInt();
+      if(n<0)
+        break;
+      o.ins(n);
+    }
+       o.max();
+}
+}
