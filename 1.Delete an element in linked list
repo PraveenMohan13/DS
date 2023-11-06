@@ -1,0 +1,102 @@
+Delete an element in linked list
+Write a program to delete an element at the beginning of the linked list. Get the values continuously from the user until the user enters a negative value.
+
+
+
+Format:
+
+Input:
+
+The input should be numbers (until user enters a negative value).
+
+Output:
+
+The output should be the list of numbers in separate lines.
+
+
+
+Example:
+
+Input:
+
+1
+
+2
+
+3
+
+4
+
+-1
+
+Output:
+
+2
+
+3
+
+4
+
+
+===============================================================================================
+import java.util.*;
+class Main
+{
+  node head,temp;
+  class node
+  {
+    int data;
+    node next;
+    node(int n)
+    {
+      data=n;
+    }
+  }
+    
+     void ins(int data)
+    {
+      node nn=new node(data);
+      if(head==null)
+      {
+        head=nn;
+        temp=nn;
+      }
+      else
+      {
+        temp.next=nn;
+        temp=nn;
+      }
+    }
+  
+  
+  void del()
+  {
+    head=head.next;
+  }
+  
+  
+  void dis()
+    {
+      temp=head;
+      while(temp!=null)
+      {
+        System.out.println(temp.data);
+        temp=temp.next;
+      }
+    }
+  public static void main(String args[])
+  {
+   Scanner z=new Scanner(System.in);
+    Main o = new Main();
+    while(true)
+    {
+      int n=z.nextInt();
+      if(n<0)
+        break;
+      o.ins(n);
+    }
+    o.del();
+      o.dis();
+    System.out.println("Hello World!");
+}
+}
