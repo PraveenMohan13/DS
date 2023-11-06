@@ -1,0 +1,105 @@
+
+Append without duplicates
+John is a teacher, he has assigned a roll number to each student in ascending order. Every time he assigns a number to a student, he wants to check whether the number is already assigned to any other student. This is to avoid duplicates in the roll number. Add a number to the list only if the number is not previously present. Implement this concept using a Linked List. If the list is empty, print "List is empty".
+
+
+
+Format:
+
+Input:
+
+The input consists of a list of integers. The negative value in the list indicates the end.
+
+Output:
+
+The output should be the list of numbers in separate lines.
+
+
+
+Example:
+
+Input:
+
+11
+
+22
+
+33
+
+22
+
+33
+
+44
+
+-77
+
+Output:
+
+11
+
+22
+
+33
+
+44
+===============================================================================================================================================
+import java.util.*;
+class Main
+{
+  node head,temp;
+  class node
+  {
+    int data;
+    node next;
+    node(int n)
+    {
+      data=n;
+    }
+  }
+     void ins(int data)
+    {
+      node nn=new node(data);
+      if(head==null)
+      {
+        head=nn;
+        temp=nn;
+      }
+      else
+      {
+        node t=head;
+        while(t!=null)
+        {
+          if(t.data==nn.data)
+         	return;
+            t=t.next;
+        }
+          temp.next=nn;
+          temp=nn;
+        }
+      }
+  void dis()
+    {
+    if(head==null)
+      System.out.println("List is empty");
+      temp=head;
+      while(temp!=null)
+      {
+        System.out.println(temp.data);
+        temp=temp.next;
+      }
+    }
+  public static void main(String args[])
+  {
+   Scanner z=new Scanner(System.in);
+    Main o = new Main();
+    while(true)
+    {
+      int n=z.nextInt();
+      if(n<0)
+        break;
+      o.ins(n);
+    }
+       o.dis();
+}
+}
