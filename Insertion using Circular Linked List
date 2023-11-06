@@ -1,3 +1,101 @@
+Write a program to create a Circular Linked List. Which can store and display N number of data using dynamic memory allocation.
+
+Hint: 1 indicates the Insertion of data and 0 indicates to display the inserted data.
+
+
+
+Example:
+
+Input:
+
+10
+
+1
+
+20
+
+1
+
+30
+
+0
+
+Output:
+
+10 20 30
+
+==========================================================================================================================================
+import java.util.*;
+class Main
+{
+  node head,temp;
+  class node
+  {
+    int data;
+    node next;
+    node(int n)
+    {
+      data=n;
+    }
+  }
+     void ins(int data)
+    {
+      node nn=new node(data);
+      if(head==null)
+      {
+        head=nn;
+        temp=nn;
+        nn.next=head;
+      }
+      else
+      {
+        
+        temp.next=nn;
+          temp=nn;
+        temp.next=head;
+        
+        }
+      }
+  void dis()
+    {
+    temp=head;
+    if(head==null)
+    {
+      System.out.println("List is empty");
+      return;
+    }
+    System.out.print(head.data+" ");
+    temp=temp.next;
+    while(temp!=head)
+    {
+      System.out.print(temp.data+" ");
+      temp=temp.next;
+    }
+  }
+    
+  public static void main(String args[])
+  {
+   Scanner z=new Scanner(System.in);
+    Main o = new Main();
+    int n=z.nextInt();
+    o.ins(n);
+    while(true)
+    {
+      int c=z.nextInt();
+      if(c==1)
+      {
+      	n=z.nextInt();
+        o.ins(n);
+      }
+      else
+      {
+       o.dis();
+        break;
+      }
+    }
+}
+}
+================================================================================================================================
 class node:
   def __init__(self,data):
     self.data=data
