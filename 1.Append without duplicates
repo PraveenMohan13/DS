@@ -81,7 +81,10 @@ class Main
   void dis()
     {
     if(head==null)
+{
       System.out.println("List is empty");
+return;
+}
       temp=head;
       while(temp!=null)
       {
