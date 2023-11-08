@@ -1,0 +1,38 @@
+Merge two sorted linked list
+Write a program to merge two sorted linked lists. Given two sorted linked lists let's say list1 and list2, merge list2 with list1. Insertion has to be done at the end of list1.
+
+
+
+Format:
+
+Input:
+
+The first line consists of the size of the first linked list.
+
+The second line consists of a sorted linked list separated by space.
+
+The third line consists of the size of the second linked list.
+
+The fourth line consists of a sorted linked list separated by space.
+
+Output:
+
+The output should be the merged list of two linked lists.
+
+
+
+Example:
+
+Input:
+
+3
+
+1 3 5
+
+3
+
+2 4 6
+
+Output:
+
+1->2->3->4->5->6->NULL
