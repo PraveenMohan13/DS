@@ -36,3 +36,112 @@ Input:
 Output:
 
 1->2->3->4->5->6->NULL
+===============================================================================================================================
+
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) throws Exception {
+
+		Scanner sc = new Scanner(System.in);
+		LinkedList list1 = new LinkedList();
+		LinkedList list2 = new LinkedList();
+
+		int size1 = sc.nextInt();
+		for (int i = 0; i < size1; i++)
+			list1.addNode(sc.nextInt());
+
+		int size2 = sc.nextInt();
+		for (int i = 0; i < size2; i++)
+			list2.addNode(sc.nextInt());
+
+		Node ans = mergeTwoLists(list1.head, list2.head);
+
+		Node temp = ans;
+
+		while (temp != null) {
+
+			System.out.print(temp.data + "->");
+			temp = temp.next;
+		}
+		System.out.print("NULL");
+		sc.close();
+	}
+
+	public static Node mergeTwoLists(Node l1, Node l2) {
+
+		if (l1 == null)
+			return l2;
+
+		if (l2 == null)
+			return l1;
+
+		Node temp = new Node(-1);
+		Node head = temp;
+
+		while (l1 != null && l2 != null) {
+
+			if (l1.data < l2.data) {
+
+				temp.next = l1;
+				temp = temp.next;
+				l1 = l1.next;
+			}
+
+			else {
+
+				temp.next = l2;
+				temp = temp.next;
+				l2 = l2.next;
+			}
+		}
+
+		while (l2 != null) {
+
+			temp.next = l2;
+			temp = temp.next;
+			l2 = l2.next;
+		}
+
+		while (l1 != null) {
+
+			temp.next = l1;
+			temp = temp.next;
+			l1 = l1.next;
+		}
+
+		return head.next;
+	}
+
+	static class Node {
+
+		int data;
+		Node next;
+
+		Node(int data) {
+
+			this.data = data;
+		}
+	}
+
+	static class LinkedList {
+
+		Node head, tail;
+		int size = 0;
+
+		public void addNode(int data) {
+
+			Node newNode = new Node(data);
+
+			if (head == null) {
+
+				head = tail = newNode;
+				return;
+			}
+
+			tail.next = newNode;
+			tail = newNode;
+		}
+	}
+}
