@@ -1,0 +1,79 @@
+Binary tree - Find maximum element
+Write a program to find the maximum element in a tree.
+
+
+
+Format:
+
+Input:
+
+6
+
+3
+
+1
+
+4
+
+2
+
+-1
+
+Output:
+
+Maximum element is 6
+===============================================================================
+import java.util.Scanner;
+public class Main {
+  static int max=Integer.MIN_VALUE;
+   static class Node {
+    int data;
+    Node left, right;
+
+    Node(int data) {
+        this.data = data;
+        left = null;
+        right = null;
+    }
+}
+    static Node append(Node root, int data) {
+        if (root == null) {
+            Node nn=new Node(data);
+            return nn;
+        } else {
+            if (data > root.data) {
+                root.right = append(root.right, data);
+            } else {
+                root.left = append(root.left, data);
+            }
+            return root;
+        }
+    }
+
+    
+    static int max(Node root) {
+        if (root == null) {
+            return 0;
+        }
+        if(max<root.data)
+          max=root.data;
+      max(root.left);
+      max(root.right);
+      return max;
+    }
+
+    
+    public static void main(String[] args) {
+        Scanner z = new Scanner(System.in);
+        Node root = null;
+        int data;
+        while (true)
+         {
+            data = z.nextInt();
+            if (data < 0) 
+                break;
+             root = append(root, data);
+        } 
+        System.out.println("Maximum element is " + max(root));
+    }
+}
