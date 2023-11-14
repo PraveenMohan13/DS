@@ -1,0 +1,78 @@
+Binary Search tree - Sum of leaf nodes
+Write a program to sum up all the leaf node elements in a tree.
+
+
+
+Format:
+
+Input:
+
+6
+
+3
+
+1
+
+4
+
+2
+
+-1
+
+Output:
+
+Sum of all leaf nodes are 6
+=====================================================================================================
+import java.util.Scanner;
+public class Main {
+  static int sum=0;
+   static class Node {
+    int data;
+    Node left, right;
+
+    Node(int data) {
+        this.data = data;
+        left = null;
+        right = null;
+    }
+}
+    static Node append(Node root, int data) {
+        if (root == null) {
+            Node nn=new Node(data);
+            return nn;
+        } else {
+            if (data > root.data) {
+                root.right = append(root.right, data);
+            } else {
+                root.left = append(root.left, data);
+            }
+            return root;
+        }
+    }
+
+    static int Lsum(Node root)
+    {
+        if(root==null)
+            return 0;
+        if(root.left==null&&root.right==null)
+          sum=sum+root.data;
+        Lsum(root.left);
+        Lsum(root.right);
+      return sum;
+    }
+    
+    public static void main(String[] args) {
+        Scanner z = new Scanner(System.in);
+        Node root = null;
+        int data;
+        while (true)
+         {
+            data = z.nextInt();
+            if (data < 0) 
+                break;
+             root = append(root, data);
+        } 
+        System.out.print("Sum of all leaf nodes are "+ Lsum(root));
+        
+    }
+}
