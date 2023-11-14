@@ -1,0 +1,157 @@
+import java.io.*;
+import java.util.*;
+
+
+
+public class Solution 
+{
+    class Node 
+    {
+    int data;
+    Node left;
+    Node right;
+
+    public Node(int data) 
+    {
+        this.data = data;
+    }
+}
+     
+    
+    
+
+    private Node ins(int data, Node root){
+        if(root == null){
+            Node newNode = new Node(data);
+            return newNode;
+        }
+        
+        if(root.data >= data)
+        {
+            root.left = ins(data, root.left);
+        }else
+        {
+            root.right = ins(data,root.right);
+        }
+        return root;
+    }
+    
+    
+
+    
+    private Node remove(int data, Node root){
+        if(root == null)
+        {
+            return null;
+        }
+        if(data < root.data)
+        {
+            root.left = remove(data,root.left);
+            return root;
+        }
+        else if(data > root.data)
+        {
+            root.right = remove(data, root.right);
+            return root;
+        }
+        else
+        {
+            if(root.left == null && root.right == null)
+            {
+                return null;
+            }
+            else if(root.left == null)
+            {
+                return root.right;
+            }
+            else if(root.right == null)
+            {
+                return root.left;
+            }
+            else
+            {
+                Node minNode = root.right;
+                while(minNode.left != null)
+                {
+                    minNode = minNode.left;
+                }
+                root.data = minNode.data;
+                root.right = remove(minNode.data, root.right);
+                return root;
+            }
+        }
+    }
+    
+ 
+    private void print(Node root)
+    {
+        if(root == null)
+        {
+            return;
+        }
+        System.out.print(root.data + ":");
+        if(root.left!= null)
+        {
+            System.out.print("L:" + root.left.data + ",");
+        }
+        
+        if(root.right!= null)
+        {
+            System.out.print("R:" + root.right.data);
+        }
+        System.out.println();
+        print(root.left);
+        print(root.right);
+    }
+    
+
+    public boolean search(int data, Node root){
+        if(root == null)
+        {
+            return false;
+        }
+        if(root.data == data)
+        {
+            return true;
+        }
+        else if(data > root.data)
+        {
+            return search(data,root.right);
+        }
+        else
+        {
+            return search(data, root.left);
+        }
+    }
+
+    public static void main(String[] args) 
+    {
+        Scanner z=new Scanner(System.in);
+        Solution o = new Solution();
+        int choice, input;
+        Node root=null;
+        int q = z.nextInt();
+        while (q-- > 0) 
+        {
+            choice = z.nextInt();
+            switch (choice) 
+            {
+            case 1:
+                input = z.nextInt();
+                root=o.ins(input,root);
+                break;
+            case 2:
+                input = z.nextInt();
+                root=o.remove(input,root);
+                break;
+            case 3:
+                input = z.nextInt();
+                System.out.println(o.search(input,root));
+                break;
+            default:
+                o.print(root);
+                break;
+            }
+        }
+    }
+}
