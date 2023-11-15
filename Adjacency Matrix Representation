@@ -103,7 +103,6 @@ class Main {
 		System.out.println("Please enter the number of edges in the graph");
 		edges=sc.nextInt();
 		System.out.println("Is the graph directed");
-		//sc.nextLine();
 		String directed=sc.next();
 		int A[][]=new int[rows+1][rows+1];
 		for(int i=1;i<=rows;i++){
@@ -112,9 +111,7 @@ class Main {
 		    }
 		}
 		printadjmatrix(A,rows);
-		//sc.next();
 		for(int i=1;i<=edges;i++){
-		    //sc.next();
 		    System.out.println("Enter the start node, end node and weight of edge no "+i);
 		    snode=sc.nextInt();
 		    enode=sc.nextInt();
