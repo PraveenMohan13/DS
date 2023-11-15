@@ -1,0 +1,31 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner z = new Scanner(System.in);
+        
+        ArrayList<ArrayList<Integer>> l = new ArrayList<ArrayList<Integer>>();
+        int v = z.nextInt();
+
+        for (int i = 0; i < v; i++) 
+            l.add(new ArrayList<Integer>());
+
+        while (z.hasNextInt()) {
+            int v1 = z.nextInt();
+            int v2 = z.nextInt();
+            l.get(v1).add(v2);
+            l.get(v2).add(v1);
+        }
+
+        for (int i = 0; i < v; i++) {
+            System.out.print(i + "-> ");
+            for (int j = 0; j < l.get(i).size(); j++) {
+                System.out.print(l.get(i).get(j) + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+
