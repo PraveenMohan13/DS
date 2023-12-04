@@ -171,3 +171,64 @@ public class Solution {
         
     }
 }
+=================================================================================================================
+import java.util.*;
+
+public class Main {
+    private int top;
+    private int[] arr;
+
+    Main(int n) {
+        arr = new int[n];
+        top = -1;
+    }
+
+    void push(int n) {
+        if (top == arr.length - 1) {
+            System.out.println("Stack Overflow");
+        } else {
+            arr[++top] = n;
+        }
+    }
+
+    void pop() {
+        if (top == -1) {
+            System.out.println("Stack is empty");
+        } else {
+            top--;
+        }
+    }
+
+    
+
+    void display() {
+        if (top == -1) {
+            System.out.println("Stack is empty");
+        } else {
+            for (int i = 0; i < top+1; i++) {
+                System.out.println(arr[i]);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner z = new Scanner(System.in);
+        int n = z.nextInt();
+        Main o = new Main(n);
+        for(int i=0;i<n;i++){
+        String c = z.next();
+        
+        if (c.equals("Push")) {
+            int value = z.nextInt();
+            o.push(value);
+        }
+        if (c.equals("Pop")) {
+            o.pop();
+        }
+        
+        if (c.equals("Print")) {
+            o.display();
+        }
+        }
+    }
+}
