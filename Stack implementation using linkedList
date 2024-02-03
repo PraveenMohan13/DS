@@ -160,3 +160,39 @@ class Main {
         l.display();
     }
 }
+===============================================================================================
+def isEmpty(stack):
+    return len(stack) == 0
+
+def push(stack, item):
+    stack.append(item)
+    
+def pop(stack):
+    if (isEmpty(stack)):
+        raise IndexError("Empty Stack")     
+    return stack.pop()
+
+def peek(stack):
+    if (isEmpty(stack)):
+        raise IndexError("Empty Stack") 
+    return stack[len(stack) - 1]
+
+def dis(stack):
+    if (isEmpty(stack)):
+        raise IndexError("Empty Stack") 
+    else:
+        print(stack)
+stack = []
+n=int(input())
+t=0
+while(True):
+    if(t>n):
+        print("stack over flow")
+        break
+    i=int(input())
+    if(i<0):
+        break
+    else:
+        push(stack,i)
+    t+=1
+print(dis(stack))
