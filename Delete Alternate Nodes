@@ -263,3 +263,27 @@ public class Solution {
         
         System.out.println();
     }
+==============================================================================================================================================
+public void AltDelete()
+    {
+        Node curr = this.head;
+        int count = 1;
+        Node prev = null;
+        while(curr!=null)
+        {
+            if(count%2==0)
+            {
+                 count++;
+                 prev.next = curr.next;
+                 curr=curr.next;
+                 
+            }
+            else
+            {
+                count++;
+                prev = curr;
+                curr = curr.next;
+            }
+        }
+
+    }
