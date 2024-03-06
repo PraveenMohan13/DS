@@ -1,8 +1,57 @@
+Implement the BST class which includes following functions -
+
+1.insert - Given an element, insert that element in the BST at the correct position. If element is equal to the data of the node, insert it in the left subtree.
+2.delete - Given an element, remove that element from the BST. If the element which is to be deleted has both children, replace that with the minimum element from right sub-tree.
+3.search - Given an element, find if that is present in BST or not. Return true or false.
+4.printTree (recursive) - Print the BST in in the following format -
+For printing a node with data N, you need to follow the exact format -
+
+N:L:x,R:y
+where, N is data of any node present in the binary tree. x and y are the values of left and right child of node N. Print the children only if it is not null.
+There is no space in between.
+You need to print all nodes in the recursive format in different lines.
+
+Input Format
+
+First line number of queries
+From Second line start giving queries
+
+Output Format
+
+Results of each query in different line
+
+Sample Input 0
+
+6
+1 2
+1 3
+1 1
+4
+2 2
+4
+Sample Output 0
+
+2:L:1,R:3
+1:
+3:
+3:L:1,
+1:
+Sample Input 1
+
+6
+1 2
+1 3
+1 1
+3 2
+2 2
+3 2
+Sample Output 1
+
+true
+false
+=========================================================================================================================================
 import java.io.*;
 import java.util.*;
-
-
-
 public class Solution 
 {
     class Node 
@@ -240,3 +289,250 @@ if __name__ == "__main__":
             o.print_tree(root)
         
         q -= 1
+===========================================================================================================================================
+#include <iostream>
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int data) : data(data), left(nullptr), right(nullptr) {}
+};
+
+class Solution {
+public:
+    Node *ins(int data, Node *root) {
+        if (root == nullptr) {
+            Node *newNode = new Node(data);
+            return newNode;
+        }
+
+        if (data <= root->data) {
+            root->left = ins(data, root->left);
+        } else {
+            root->right = ins(data, root->right);
+        }
+        return root;
+    }
+
+    Node *remove(int data, Node *root) {
+        if (root == nullptr) {
+            return nullptr;
+        }
+
+        if (data < root->data) {
+            root->left = remove(data, root->left);
+        } else if (data > root->data) {
+            root->right = remove(data, root->right);
+        } else {
+            if (root->left == nullptr && root->right == nullptr) {
+                delete root;
+                return nullptr;
+            } else if (root->left == nullptr) {
+                Node *temp = root->right;
+                delete root;
+                return temp;
+            } else if (root->right == nullptr) {
+                Node *temp = root->left;
+                delete root;
+                return temp;
+            } else {
+                Node *minNode = root->right;
+                while (minNode->left != nullptr) {
+                    minNode = minNode->left;
+                }
+                root->data = minNode->data;
+                root->right = remove(minNode->data, root->right);
+            }
+        }
+        return root;
+    }
+
+    void printTree(Node *root) {
+        if (root == nullptr) {
+            return;
+        }
+        cout << root->data << ":";
+        if (root->left != nullptr) {
+            cout << "L:" << root->left->data << ",";
+        }
+
+        if (root->right != nullptr) {
+            cout << "R:" << root->right->data;
+        }
+        cout << endl;
+        printTree(root->left);
+        printTree(root->right);
+    }
+
+    bool search(int data, Node *root) {
+        if (root == nullptr) {
+            return false;
+        }
+        if (data == root->data) {
+            return true;
+        } else if (data > root->data) {
+            return search(data, root->right);
+        } else {
+            return search(data, root->left);
+        }
+    }
+};
+
+int main() {
+    Solution o;
+    Node *root = nullptr;
+    int q;
+    cin >> q;
+
+    while (q-- > 0) {
+        int choice, data;
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cin >> data;
+                root = o.ins(data, root);
+                break;
+            case 2:
+                cin >> data;
+                root = o.remove(data, root);
+                break;
+            case 3:
+                cin >> data;
+                cout << o.search(data, root) << endl;
+                break;
+            default:
+                o.printTree(root);
+                break;
+        }
+    }
+
+    return 0;
+}
+=================================================================================================
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node *left;
+    struct Node *right;
+};
+
+struct Node *createNode(int data) {
+    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->left = newNode->right = NULL;
+    return newNode;
+}
+
+struct Node *ins(int data, struct Node *root) {
+    if (root == NULL) {
+        struct Node *newNode = createNode(data);
+        return newNode;
+    }
+
+    if (data <= root->data) {
+        root->left = ins(data, root->left);
+    } else {
+        root->right = ins(data, root->right);
+    }
+    return root;
+}
+
+struct Node *removeNode(int data, struct Node *root) {
+    if (root == NULL) {
+        return NULL;
+    }
+
+    if (data < root->data) {
+        root->left = removeNode(data, root->left);
+    } else if (data > root->data) {
+        root->right = removeNode(data, root->right);
+    } else {
+        if (root->left == NULL && root->right == NULL) {
+            free(root);
+            return NULL;
+        } else if (root->left == NULL) {
+            struct Node *temp = root->right;
+            free(root);
+            return temp;
+        } else if (root->right == NULL) {
+            struct Node *temp = root->left;
+            free(root);
+            return temp;
+        } else {
+            struct Node *minNode = root->right;
+            while (minNode->left != NULL) {
+                minNode = minNode->left;
+            }
+            root->data = minNode->data;
+            root->right = removeNode(minNode->data, root->right);
+        }
+    }
+    return root;
+}
+
+void printTree(struct Node *root) {
+    if (root == NULL) {
+        return;
+    }
+    printf("%d:", root->data);
+    if (root->left != NULL) {
+        printf("L:%d,", root->left->data);
+    }
+
+    if (root->right != NULL) {
+        printf("R:%d", root->right->data);
+    }
+    printf("\n");
+    printTree(root->left);
+    printTree(root->right);
+}
+
+int search(int data, struct Node *root) {
+    if (root == NULL) {
+        return 0;
+    }
+    if (data == root->data) {
+        return 1;
+    } else if (data > root->data) {
+        return search(data, root->right);
+    } else {
+        return search(data, root->left);
+    }
+}
+
+int main() {
+    struct Node *root = NULL;
+    int q, choice, data;
+    scanf("%d", &q);
+
+    while (q-- > 0) {
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                scanf("%d", &data);
+                root = ins(data, root);
+                break;
+            case 2:
+                scanf("%d", &data);
+                root = removeNode(data, root);
+                break;
+            case 3:
+                scanf("%d", &data);
+                printf("%d\n", search(data, root));
+                break;
+            default:
+                printTree(root);
+                break;
+        }
+    }
+
+    return 0;
+}
