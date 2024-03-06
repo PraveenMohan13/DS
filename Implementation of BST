@@ -155,3 +155,88 @@ public class Solution
         }
     }
 }
+==========================================================================================================================================================
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class Solution:
+    def ins(self, data, root):
+        if root is None:
+            new_node = Node(data)
+            return new_node
+
+        if data <= root.data:
+            root.left = self.ins(data, root.left)
+        else:
+            root.right = self.ins(data, root.right)
+        return root
+
+    def remove(self, data, root):
+        if root is None:
+            return None
+
+        if data < root.data:
+            root.left = self.remove(data, root.left)
+        elif data > root.data:
+            root.right = self.remove(data, root.right)
+        else:
+            if root.left is None and root.right is None:
+                return None
+            elif root.left is None:
+                return root.right
+            elif root.right is None:
+                return root.left
+            else:
+                min_node = root.right
+                while min_node.left is not None:
+                    min_node = min_node.left
+                root.data = min_node.data
+                root.right = self.remove(min_node.data, root.right)
+        return root
+
+    def print_tree(self, root):
+        if root is None:
+            return
+        print(f"{root.data}:", end="")
+        if root.left is not None:
+            print(f"L:{root.left.data},", end="")
+        if root.right is not None:
+            print(f"R:{root.right.data}", end="")
+        print()
+        self.print_tree(root.left)
+        self.print_tree(root.right)
+
+    def search(self, data, root):
+        if root is None:
+            return False
+        if data == root.data:
+            return True
+        elif data > root.data:
+            return self.search(data, root.right)
+        else:
+            return self.search(data, root.left)
+
+if __name__ == "__main__":
+    o = Solution()
+    root = None
+    q = int(input())
+    
+    while q > 0:
+        choice = int(input())
+        
+        if choice == 1:
+            data = int(input())
+            root = o.ins(data, root)
+        elif choice == 2:
+            data = int(input())
+            root = o.remove(data, root)
+        elif choice == 3:
+            data = int(input())
+            print(o.search(data, root))
+        else:
+            o.print_tree(root)
+        
+        q -= 1
