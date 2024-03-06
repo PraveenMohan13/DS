@@ -70,11 +70,134 @@ public class Main {
         System.out.println("Sum of all nodes are " + add(root));
     }
 }
+========================================================================================================================================================
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
 
+def append(root, data):
+    if root is None:
+        nn = Node(data)
+        return nn
+    else:
+        if data > root.data:
+            root.right = append(root.right, data)
+        else:
+            root.left = append(root.left, data)
+        return root
 
+def add(root):
+    if root is None:
+        return 0
+    return root.data + add(root.left) + add(root.right)
 
+if __name__ == "__main__":
+    root = None
+    while True:
+        data = int(input())
+        if data < 0:
+            break
+        root = append(root, data)
 
+    print("Sum of all nodes are", add(root))
+======================================================================================================================================
+#include <stdio.h>
+#include <stdlib.h>
 
+struct Node {
+    int data;
+    struct Node *left, *right;
+};
 
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->left = newNode->right = NULL;
+    return newNode;
+}
 
+struct Node* append(struct Node* root, int data) {
+    if (root == NULL) {
+        return createNode(data);
+    } else {
+        if (data > root->data) {
+            root->right = append(root->right, data);
+        } else {
+            root->left = append(root->left, data);
+        }
+        return root;
+    }
+}
 
+int add(struct Node* root) {
+    if (root == NULL) {
+        return 0;
+    }
+    return root->data + add(root->left) + add(root->right);
+}
+
+int main() {
+    struct Node* root = NULL;
+    int data;
+    
+    while (1) {
+        scanf("%d", &data);
+        if (data < 0) 
+            break;
+        root = append(root, data);
+    } 
+
+    printf("Sum of all nodes is %d\n", add(root));
+
+    return 0;
+}
+=================================================================================================================================================
+#include <iostream>
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* left;
+    Node* right;
+
+    Node(int data) : data(data), left(nullptr), right(nullptr) {}
+};
+
+Node* append(Node* root, int data) {
+    if (root == nullptr) {
+        return new Node(data);
+    } else {
+        if (data > root->data) {
+            root->right = append(root->right, data);
+        } else {
+            root->left = append(root->left, data);
+        }
+        return root;
+    }
+}
+
+int add(Node* root) {
+    if (root == nullptr) {
+        return 0;
+    }
+    return root->data + add(root->left) + add(root->right);
+}
+
+int main() {
+    Node* root = nullptr;
+    int data;
+
+    while (true) {
+        cin >> data;
+        if (data < 0)
+            break;
+        root = append(root, data);
+    }
+
+    cout << "Sum of all nodes is " << add(root) << endl;
+
+    return 0;
+}
