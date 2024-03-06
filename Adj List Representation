@@ -29,3 +29,20 @@ public class Solution {
     }
 }
 
+================================================================================================================
+v = int(input())
+adj_list = [[] for _ in range(v)]
+
+while True:
+    try:
+        v1, v2 = map(int, input().split())
+        adj_list[v1].append(v2)
+        adj_list[v2].append(v1)
+    except ValueError:
+        break
+
+for i in range(v):
+    print(f"{i} -> ", end="")
+    for j in range(len(adj_list[i])):
+        print(f"{adj_list[i][j]} ", end="")
+    print()
