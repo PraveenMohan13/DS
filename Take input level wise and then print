@@ -180,3 +180,50 @@ public class Solution
         levelOrder(root);
     }
 }
+==============================================================================
+from queue import Queue
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+root = None
+q = Queue()
+
+def insert_value(value):
+    global root
+    nn = Node(value)
+    if root is None:
+        root = nn
+    elif q.queue[0].left is None:
+        q.queue[0].left = nn
+    else:
+        q.queue[0].right = nn
+        q.get()
+    q.put(nn)
+
+def print_level_order(root):
+    if root is None:
+        return
+    
+    q1 = Queue()
+    q1.put(root)
+
+    while not q1.empty():
+        print(q1.queue[0].data, end=" ")
+        if q1.queue[0].left is not None:
+            q1.put(q1.queue[0].left)
+        if q1.queue[0].right is not None:
+            q1.put(q1.queue[0].right)
+        q1.get()
+
+if __name__ == "__main__":
+    n = int(input())
+    values = list(map(int, input().split()))
+
+    for i in range(n):
+        insert_value(values[i])
+
+    print_level_order(root)
