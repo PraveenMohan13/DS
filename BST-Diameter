@@ -1,0 +1,81 @@
+Binary Search Tree - Diameter
+Write a program to find the diameter of a binary search tree.
+Example:
+
+Input:
+
+1
+
+2
+
+3
+
+4
+
+5
+
+-1
+
+Output:
+
+Diameter of the given binary tree is 5
+
+======================================================================================================
+import java.util.Scanner;
+
+class Node {
+    int data;
+    Node left, right;
+
+    public Node(int item) {
+        data = item;
+        left = right = null;
+    }
+}
+
+public class Main {
+    static Node root=null;
+
+    static int diameter(Node root) {
+        if (root == null)
+            return 0;
+        int lheight = height(root.left);
+        int rheight = height(root.right);
+        int ldiameter = diameter(root.left);      
+        int rdiameter = diameter(root.right);
+        return Math.max(lheight + rheight + 1,Math.max(ldiameter, rdiameter));
+    }
+
+    static int height(Node node) {
+        if (node == null)
+            return 0;
+
+        return (1 + Math.max(height(node.left), height(node.right)));
+    }
+
+    static Node insert(Node root, int num) {
+        Node nn = new Node(num);
+        if (root == null) {
+            root = nn;
+            return root;
+        } else if (num < root.data) {
+            root.left = insert(root.left, num);
+        } else if (num > root.data) {
+            root.right = insert(root.right, num);
+        }
+        return root;
+    }
+
+    public static void main(String[] args) {
+        Scanner z = new Scanner(System.in);
+         while (true) {
+            int value = z.nextInt();
+            if (value == -1) {
+                break;
+            }
+          root = insert(root,value);
+        }
+        System.out.println("Diameter of the given binary tree is " + diameter(root));
+        
+    }
+}
