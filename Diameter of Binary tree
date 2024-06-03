@@ -1,0 +1,105 @@
+Given Binary tree Please find the diamater of that tree
+
+Input Format
+
+The first and the only line of input will contain the node data, all separated by a single space. Since -1 is used as an indication whether the left or right node data exist for root, it will not be a part of the node data.
+
+Constraints
+
+Time:- 1 Sec
+
+Output Format
+
+The only line of output prints an integer, representing the diameter of the tree.
+
+Sample Input 0
+
+2 4 5 6 -1 -1 7 20 30 80 90 -1 -1 8 -1 -1 9 -1 -1 -1 -1 -1 -1
+Sample Output 0
+
+8
+Sample Input 1
+
+1 2 3 4 5 6 7 -1 -1 -1 -1 -1 -1 -1 -1
+Sample Output 1
+
+4
+
+=======================================================================================================================
+import java.util.*;
+
+public class Solution {
+    static class Node 
+    {
+        int data;
+        Node left, right;
+
+        public Node(int item) {
+            data = item;
+            left = right = null;
+        }
+    }
+
+
+    static Node root=null;
+
+    static int diameter(Node root) {
+        if (root == null)
+            return 0;
+        int lheight = height(root.left);
+        int rheight = height(root.right);
+        int ldiameter = diameter(root.left);      
+        int rdiameter = diameter(root.right);
+        return Math.max(lheight + rheight ,Math.max(ldiameter, rdiameter));
+    }
+
+    static int height(Node node) 
+    {
+        if (node == null)
+            return 0;
+
+        return (1 + Math.max(height(node.left), height(node.right)));
+    }
+
+    public static void main(String[] args) {
+        Solution v = new Solution();
+        Scanner z = new Scanner(System.in);
+        Queue<Node> q=new LinkedList<>();
+        
+        String[] s=z.nextLine().split(" ");
+        
+        int i=0,data,c=1;
+        Node nn,head,temp;
+        
+        data=Integer.parseInt(s[i++]);
+        nn=new Node(data);
+        q.add(nn);
+        head=nn;
+        
+        while(!q.isEmpty())
+        {
+            temp=q.poll();
+            data=Integer.parseInt(s[i++]);
+            if(data!=-1)
+            {
+                temp.left=new Node(data);
+                q.add(temp.left);
+                c++;
+            }
+            
+            data=Integer.parseInt(s[i++]);
+            if(data!=-1)
+            {
+                temp.right=new Node(data);
+                q.add(temp.right);
+                c++;
+            }
+        }
+        if(head != null)
+            System.out.println(v.diameter(head));
+        else 
+            System.out.println("The tree is empty.");
+        
+        
+    }
+}
