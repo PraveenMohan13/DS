@@ -1,3 +1,47 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+       Scanner z = new Scanner(System.in);
+        Queue<Integer> q = new LinkedList<>();
+        int v = z.nextInt();
+        int e = z.nextInt();
+        int a[][] = new int[v][v];
+        for(int i=0;i<e;i++)
+        {
+            int v1 = z.nextInt();
+            int v2 = z.nextInt();
+            a[v1][v2]=1;
+            a[v2][v1]=1;
+        }
+        boolean vis[] = new boolean[v];
+        vis[0]=true;
+        q.add(0);
+        while(!q.isEmpty())
+        {
+            int t = q.poll();
+            System.out.print(t+" ");
+            for(int i=0;i<v;i++)
+            {
+                if(a[t][i]==1 && !vis[i])
+                {
+                    q.add(i);
+                    vis[i]=true;
+                }
+            }
+        }
+        
+        
+    }
+}
+============================================================================================================
+
+
 BFS Traversal
 Write a program to implement the BFS traversal of a graph.
 
