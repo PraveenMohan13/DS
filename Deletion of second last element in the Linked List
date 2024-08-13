@@ -1,0 +1,142 @@
+Deletion of second last element in the Linked List
+Write a program to delete the second last element from the given Linked List. If deletion of the second last element is not possible, then print "Deletion of second last element is not possible". Otherwise, print the list after deleting the second last element.
+
+
+
+Format
+
+Input:
+
+The input consists of listed integers, a negative value indicates the end of the linked list.
+
+Output:
+
+The output should be the elements in a list separated by space.
+
+
+
+Example:
+
+Input:
+
+2
+
+4
+
+6
+
+8
+
+10
+
+-21
+
+Output:
+
+2 4 6 10
+==================================================================================
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Main {
+
+    static Node head;
+    Node temp;
+    class Node
+    {
+        int data;
+        Node next;
+        Node(int data)
+        {
+            this.data=data;
+            this.next=null;
+        }
+    }
+    void ins(int data)
+    {
+        Node nn=new Node(data);
+        if(head==null)
+        {
+            head=nn;
+            temp=nn;
+        }
+        else
+        {
+            temp.next=nn;
+            temp=nn;
+        }
+    }
+    
+    
+    void dis()
+    {
+      if(head==null)
+      {
+        System.out.print("List is empty");
+        return;
+      }
+      temp=head;
+        while(temp!=null)
+        {
+            System.out.print(temp.data+" ");
+            temp=temp.next;
+        }  
+    }
+  
+  public static int len()
+    {
+        Node T=head;
+        int c=0;
+        while(T!=null)
+        {
+            T=T.next;
+            c++;
+        }
+        return c;
+    }
+    public boolean removeNthFromEnd(int n) {
+     
+        int l=len();
+       if(l<2)
+      {
+        System.out.print("Deletion of second last element is not possible");
+        return false;
+      }
+
+        int s=l-n;
+        if(head==null)
+            return true;
+        if(s==0){
+            head=head.next;
+            return true;
+        }
+
+        Node t=head;
+        for(int i=1;i<s;i++)
+        {
+            t=t.next;
+        }
+        if(t.next!=null)
+            t.next=t.next.next;
+      return true;  
+    }
+  
+    public static void main(String[] args) {
+        Scanner z=new Scanner(System.in);
+        Main s=new Main();
+        while(true)
+        {
+            int n=z.nextInt();
+                if(n>0)
+                  s.ins(n);
+                else
+                    break;
+        }
+       if(s.removeNthFromEnd(2))
+        	s.dis();
+      
+    }
+}
