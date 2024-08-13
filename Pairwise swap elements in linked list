@@ -1,0 +1,132 @@
+Pairwise swap elements in linked list
+Given a linked list, write a program to swap elements pairwise. If the list is empty, print "List is empty".
+
+
+
+Format:
+
+Input:
+
+The input consists of a list of integers, a negative value indicates the end of the linked list.
+
+Output:
+
+The output should be numbers in the list in separate lines.
+
+
+
+Example:
+
+Input:
+
+10
+
+20
+
+20
+
+10
+
+-30
+
+Output:
+
+20
+
+10
+
+10
+
+20
+
+
+
+=========================================================================================
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Main {
+
+    static Node head;
+    Node temp;
+    class Node
+    {
+        int data;
+        Node next;
+        Node(int data)
+        {
+            this.data=data;
+            this.next=null;
+        }
+    }
+    void ins(int data)
+    {
+        Node nn=new Node(data);
+        if(head==null)
+        {
+            head=nn;
+            temp=nn;
+        }
+        else
+        {
+            temp.next=nn;
+            temp=nn;
+        }
+    }
+    
+    Node rev(int key,Node head)
+    {
+        Node pre=null;
+        Node cur;
+        Node nxt;
+        cur=head;
+        int c=0;
+        while(cur !=null&&c!=key)
+        {
+            nxt=cur.next;
+            cur.next=pre;
+            pre=cur;
+            cur=nxt; 
+            c++;
+        }
+        if(cur!=null)
+           head.next= rev(key,cur);
+       return pre;
+    }
+    
+    void dis()
+    {
+      if(head==null)
+      {
+        System.out.print("List is empty");
+        return;
+      }
+      temp=head;
+        while(temp!=null)
+        {
+            System.out.println(temp.data);
+            temp=temp.next;
+        }  
+    }
+    public static void main(String[] args) {
+        Scanner z=new Scanner(System.in);
+        Main s=new Main();
+        while(true)
+        {
+            int n=z.nextInt();
+                if(n>0)
+                  s.ins(n);
+                else
+                    break;
+        }
+        int key=2;
+        if(key!=0){
+        head=s.rev(key,head);
+        }
+        s.dis();
+      
+    }
+}
