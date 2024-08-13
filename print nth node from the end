@@ -1,0 +1,145 @@
+Linked list - nth node from the end
+Write a program to find the nth node of a list from the end. If there is no nth node, print "There is no nth node in the list". Otherwise, print the nth node element.
+
+
+
+Format:
+
+Input:
+
+The input should be a positive integer (until the user enters a negative value).
+
+The last line should be the value of an nth node.
+
+Output:
+
+The output should be the list of numbers in separate lines.
+
+
+
+Example:
+
+Input:
+
+1
+
+2
+
+3
+
+4
+
+-1
+
+2
+
+Output:
+
+Enter the nth node:
+
+3 is the nth node element in the list
+=========================================================================================
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Main {
+
+    static Node head;
+    Node temp;
+    class Node
+    {
+        int data;
+        Node next;
+        Node(int data)
+        {
+            this.data=data;
+            this.next=null;
+        }
+    }
+    void ins(int data)
+    {
+        Node nn=new Node(data);
+        if(head==null)
+        {
+            head=nn;
+            temp=nn;
+        }
+        else
+        {
+            temp.next=nn;
+            temp=nn;
+        }
+    }
+    
+    
+    void dis()
+    {
+      if(head==null)
+      {
+        System.out.print("List is empty");
+        return;
+      }
+      temp=head;
+        while(temp!=null)
+        {
+            System.out.print(temp.data+" ");
+            temp=temp.next;
+        }  
+    }
+  
+  public static int len()
+    {
+        Node T=head;
+        int c=0;
+        while(T!=null)
+        {
+            T=T.next;
+            c++;
+        }
+        return c;
+    }
+    public boolean removeNthFromEnd(int n) {
+        int l=len();
+       if(l<n)
+      {
+        System.out.print("There is no nth node in the list");
+        return false;
+      }
+        int s=l-n;
+        if(head==null)
+            return true;
+        if(s==0){
+            System.out.print(head.data+" is the nth node element in the list");
+            return true;
+        }
+
+        Node t=head;
+        for(int i=1;i<s;i++)
+        {
+            t=t.next;
+        }
+        if(t.next!=null)
+            System.out.print(t.next.data+" is the nth node element in the list");
+      return true;  
+    }
+  
+    public static void main(String[] args) {
+        Scanner z=new Scanner(System.in);
+        Main s=new Main();
+        while(true)
+        {
+            int n=z.nextInt();
+                if(n>0)
+                  s.ins(n);
+                else
+                    break;
+        }
+      System.out.println("Enter the nth node:");
+      int k=z.nextInt();
+      s.removeNthFromEnd(k);
+      
+    }
+}
