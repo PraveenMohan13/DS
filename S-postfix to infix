@@ -1,0 +1,30 @@
+//post to in
+public class Main {
+    public static void main(String[] args) {
+      Scanner z= new Scanner(System.in);
+      String s= z.next();
+      Stack<Integer> x = new Stack<>();
+      for(int i=0;i<s.length();i++)
+      {
+        if(Character.isDigit(s.charAt(i)))
+        {
+          x.push(s.charAt(i)-'0');
+        }
+        else
+        {
+          int a1 = x.pop();
+          int a2 = x.pop();
+          if(s.charAt(i)=='+')
+            x.push(a1+a2);
+          else if(s.charAt(i)=='+')
+            x.push(a1-a2);
+          else if(s.charAt(i)=='*')
+            x.push(a1*a2);
+          else if(s.charAt(i)=='/')
+            x.push(a1/a2);  
+        }
+           
+      }
+        System.out.println(x.pop());
+    }
+}
