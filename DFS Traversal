@@ -60,3 +60,41 @@ if __name__ == "__main__":
         li[sv][fv] = 1
 
     dfs(li)
+=======================================================================
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+ public static void fun(int a[][],boolean bol[],int v,int s)
+        {
+            bol[s]=true;
+            System.out.print(s+" ");
+            for(int i=0;i<v;i++)
+            {
+                if(a[s][i]==1 && !bol[i])
+                {
+                    fun(a,bol,v,i);
+                }
+            }
+        }     
+    public static void main(String[] args) {
+       
+        Scanner z=new Scanner(System.in);
+        int v=z.nextInt();
+        int e=z.nextInt();
+        int a[][]=new int[v][v];
+        for(int i=0;i<e;i++)
+        {
+            int st=z.nextInt();
+            int end =z.nextInt();
+            a[st][end]=1;
+            a[end][st]=1;
+        }
+        boolean bol[]=new boolean[v];
+        for(int i=0;i<v;i++)
+        {
+            if(!bol[i])
+                fun(a,bol,v,i);
+        }
+    }
+}
