@@ -1,0 +1,87 @@
+import java.util.Scanner;
+public class Main {
+   static class Node {
+    int data;
+    Node left, right;
+
+    Node(int data) {
+        this.data = data;
+        left = null;
+        right = null;
+    }
+}
+    public static void binaryTreeZigZagTraversal(Node root) {
+        if (root == null) {
+            return;
+        }
+        Stack<Node> currentLevel = new Stack<>();
+        Stack<Node> nextLevel = new Stack<>();
+        boolean leftToRight = true;
+        currentLevel.push(root);
+
+        while (!currentLevel.isEmpty()) {
+            Node node = currentLevel.pop();
+     System.out.print(node.data + " ");
+
+            if (leftToRight) {
+                if (node.left != null) {
+                   nextLevel.push(node.left);
+                }
+ if (node.right != null) {
+                    nextLevel.push(node.right);
+                }
+            } else {
+                if (node.right != null) {
+                    nextLevel.push(node.right);
+                }
+                if (node.left != null) {
+                    nextLevel.push(node.left);
+                }
+            }
+
+            if (currentLevel.isEmpty()) {
+                leftToRight = !leftToRight;
+                Stack<Node> temp = currentLevel;
+                currentLevel = nextLevel;
+                nextLevel = temp;
+            }
+        }
+    }
+    
+    static Node append(Node root, int data) {
+        if (root == null) {
+            Node nn=new Node(data);
+            return nn;
+        } else {
+            if (data > root.data) {
+                root.right = append(root.right, data);
+            } else {
+                root.left = append(root.left, data);
+            }
+            return root;
+        }
+    }
+    static void dis(Node root)
+    {
+        if(root==null)
+            return;
+        dis(root.left);
+        System.out.print(root.data);
+        dis(root.right);
+    }
+
+    
+    public static void main(String[] args) {
+        Scanner z = new Scanner(System.in);
+        Node root = null;
+        int data;
+        while (true)
+         {
+            data = z.nextInt();
+            if (data < 0) 
+                break;
+             root = append(root, data);
+        } 
+        binaryTreeZigZagTraversal(root);
+    }
+}
