@@ -67,7 +67,63 @@ if __name__ == "__main__":
     head = tree(li)
     print(sum(head))
 -============================================================================================================================================================================
+import java.util.*;
+import java.io.*;
 
+class Node {
+    int data;
+    ArrayList<Node> children;
+    
+    public Node(int data) {
+        this.data = data;
+        children = new ArrayList<>();
+    }
+}
+
+public class Main {
+    static int sum=0;
+    public static void main(String[] args) throws IOException {
+        Scanner z=new Scanner(System.in);
+        String[] input = z.nextLine().split(" ");
+        ArrayList<Integer> li = new ArrayList<>();
+        for (String s : input) {
+            li.add(Integer.parseInt(s));
+        }
+        Node root = inputLevelWise(li);
+        sumOfAllNodes(root);
+        System.out.println(sum);
+    }
+    public static Node inputLevelWise(ArrayList<Integer> li) {
+        int i = 0;
+        int data = li.get(i);
+        i++;
+   
+        Node root = new Node(data);
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        while (!q.isEmpty()) {
+            Node frontNode = q.poll();
+            int noOfChildren = li.get(i);
+            i++;
+            for (int j = 0; j < noOfChildren; j++) {
+                int childData = li.get(i + j);
+                Node childNode = new Node(childData);
+                frontNode.children.add(childNode);
+                q.add(childNode);
+            }
+            i += noOfChildren;
+        }
+        return root;
+    }
+
+    public static void sumOfAllNodes(Node root) {
+        sum+=root.data;
+        for(Node i:root.children)
+            sumOfAllNodes(i);
+    }
+        
+}
+===================================================================================
 java
 import java.util.*;
 import java.io.*;
