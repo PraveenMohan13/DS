@@ -1,0 +1,68 @@
+import java.util.*;
+
+public class Main {
+  static node head=null;
+  static node temp=null;
+  public static void ins(int d)
+  {
+    node nn=new node(d);
+    if(head==null)
+    {
+      head=nn;
+      temp=nn;
+    }
+    else
+    {
+      temp.next=nn;
+      nn.pre=temp;
+      temp=temp.next;
+    }
+      
+  }
+  public static void rotate(int k)
+  {
+    if(k==0)
+      return;
+      for(int i=0;i<k;i++)
+      {
+        temp.next=head;
+        head.pre=temp;
+        head=temp;
+        temp=temp.pre;
+        temp.next=null;
+      }
+       
+  }
+  public static void dis()
+  {
+    node t=head;
+    while(t!=null)
+    {
+      System.out.print(t.data+" ");
+      t=t.next;
+    }
+  }
+    public static void main(String[] args) {
+      Scanner z=new Scanner(System.in);
+      int n=z.nextInt();
+      for(int i=0;i<n;i++)
+      {
+        int d=z.nextInt();
+        ins(d);
+      }
+      int k=z.nextInt();
+      rotate(k);
+      dis();
+      System.out.println("Hello, World!");
+  }
+}
+class node
+{
+  int data;
+  node pre;
+  node next;
+  node(int d)
+  {
+    data=d;
+  }
+}
