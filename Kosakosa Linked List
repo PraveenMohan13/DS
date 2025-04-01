@@ -1,0 +1,71 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+class node 
+{
+    int data;
+    node next;
+    node(int d)
+    {
+        data=d;
+    }
+}
+public class Solution {
+   static node head=null;
+   static node last=null;
+    static void ins(int d)
+    {
+        node nn=new node(d);
+        if(head==null)
+        {
+            head=nn;
+            last=nn;
+        }
+        else
+        {
+            node t=head;
+            while(t!=null)
+            {
+                if(t.data==d)
+                    return;
+                t=t.next;
+            }
+            last.next=nn;
+            last=nn;
+        }
+    }
+    static void dis()
+    {
+        node t=head;
+        while(t!=null)
+        {
+            System.out.print(t.data+" ");
+            t=t.next;
+        }
+    }
+    static int mid()
+    {
+        node s =head;
+        node f=head;
+        while(f!=null&&f.next!=null)
+        {
+            s=s.next;
+            f=f.next.next;
+        }
+        return s.data;
+    }
+    public static void main(String[] args) {
+       Scanner z=new Scanner(System.in);
+        while(z.hasNext())
+        {
+            int a=z.nextInt();
+            ins(a);
+        }
+        dis();
+        System.out.println();
+        System.out.print(mid());
+    }
+}
