@@ -1,0 +1,64 @@
+#include <iostream>
+using namespace std;
+class node
+{
+  public:
+  int data;
+  node *next;
+  node(int d)
+  {
+    data=d;
+    next=nullptr;
+  }
+};
+class stack
+{
+  public:
+  node *head=nullptr;
+  void push(int d)
+  {
+    node * nn=new node(d);
+    if(head==nullptr)
+    {
+      head=nn;
+    }
+    else
+    {
+      nn->next=head;
+      head=nn;
+    }
+  }
+  void dis()
+  {
+    node *t=head;
+    while(t!=nullptr)
+    {
+      cout<<t->data<<" -> ";
+      t=t->next;
+    }
+    cout<<"NULL"<<endl;
+  }
+  void pop()
+  {
+    if(head==nullptr)
+    {
+      cout<<"Stack Underflow";
+    }
+    node *x=head->next;
+    head->next=nullptr;
+    head=x;
+  }
+};
+  
+int main() 
+{
+    int n;
+    stack s;
+    while(cin>>n)
+    {
+      s.push(n);
+    }
+    s.dis();
+    s.pop();
+    s.dis();
+}
