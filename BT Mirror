@@ -1,0 +1,13 @@
+static void mirror(node root) {
+        if (root == null)
+            return ;
+
+        // Invert the left and right subtree
+		mirror(root.left);
+		mirror(root.right);
+
+        // Swap the left and right subtree
+        node temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+    }
