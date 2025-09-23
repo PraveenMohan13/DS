@@ -98,3 +98,46 @@ public class Solution {
         }
     }
 }
+======================================================
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    static void dfs(int a[][],int v)
+    {
+        Stack<Integer> st =new Stack<>();
+        boolean vis[]=new boolean[v];
+        st.push(0);
+        while(!st.isEmpty())
+        {
+            int spe=st.pop();
+            if(vis[spe]==false)
+            {
+                System.out.print(spe+" ");
+                vis[spe]=true;
+                for(int i=v-1;i>=0;i--)
+                {
+                    if(a[spe][i]!=0 && vis[i]==false)
+                    {
+                        st.push(i);
+                    }
+                        
+                }
+            }
+        }
+    }
+    public static void main(String[] args) {
+        Scanner z=new Scanner(System.in);
+        int v=z.nextInt();
+        int e=z.nextInt();
+        int a[][]=new int[v][v];
+        for(int i=0;i<e;i++)
+        {
+            int sv=z.nextInt();
+            int ev=z.nextInt();
+            a[sv][ev]=1;
+            a[ev][sv]=1;
+        }
+        dfs(a,v);
+    }
+}
