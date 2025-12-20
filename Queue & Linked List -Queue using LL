@@ -1,0 +1,95 @@
+import java.util.*;
+class node
+{
+    int data;
+    node next;
+    node(int d)
+    {
+        data=d;
+    }
+}
+class Main
+{
+    node enque(int data,node head)
+    {
+        node nn=new node(data);
+        if(head==null)
+        {
+            head=nn;
+        }
+        else
+        {
+            node trv=head;
+            while(trv.next!=null)
+                trv=trv.next;
+            trv.next=nn;
+        }
+        return head;
+    }
+    node poll(node head)
+    {
+        int val=Integer.MIN_VALUE;
+        if(head!=null)
+        {
+            System.out.println(head.data);
+            node safe = head.next;
+            head.next = null;
+            head = safe;
+        }
+        else
+        {
+            System.out.println("Queue is Empty");
+        }
+        return head;
+    }
+    
+    node deque(node head)
+    {
+        if(head!=null)
+        {
+             node safe = head.next;
+            head.next = null;
+            head = safe;
+            System.out.println("1 delement is deleted");
+        }
+        else
+            System.out.print("Queue is Empty");
+        
+        return head;
+       
+    }
+    
+    boolean isEmpty(node head)
+    {
+        if(head==null)
+            return true;
+        else
+            return false;
+    }
+    
+    void dis(node head)
+    {
+        node t=head;
+        while(t!=null)
+        {
+            System.out.print(t.data+" ");
+            t=t.next;
+        }
+        System.out.println();
+    }
+  public static void main(String arg[])
+  {
+      Scanner z=new Scanner(System.in);
+      Main m=new Main();
+      node head=null;
+      while(z.hasNext())
+      {
+          int data=z.nextInt();
+          head = m.enque(data,head);    //ins
+      }
+    head = m.deque(head);                //del
+     System.out.println(m.isEmpty(head));
+      head = m.poll(head);                 //show and remove
+      m.dis(head);
+  }
+}
