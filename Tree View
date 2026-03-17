@@ -1,0 +1,166 @@
+==========================left view=========================================
+import java.util.ArrayList;
+
+class Node {
+    int data;
+    Node left, right;
+
+    Node(int x) {
+        data = x;
+        left = right = null;
+    }
+}
+
+class GfG {
+    private static void recLeftView(Node root, int level, ArrayList<Integer> result) {
+        if (root == null) return;
+        
+        if (level == result.size()) {
+            result.add(root.data);
+        }
+        
+        recLeftView(root.left, level + 1, result);
+        recLeftView(root.right, level + 1, result);
+    }
+
+    public static ArrayList<Integer> leftView(Node root) {
+        ArrayList<Integer> result = new ArrayList<>();
+        recLeftView(root, 0, result);
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Scanner z=new Scanner(System.in);
+        Queue<Node> q=new LinkedList<>();
+        int val=z.nextInt();
+        Node nn=new Node(val);
+        Node root=nn;
+        q.add(nn);
+        while(!q.isEmpty()&&z.hasNext())
+        {
+            Node qpe=q.poll();
+            String vl=z.next();
+            if(!vl.equals("Null"))
+            {
+                nn=new Node(Integer.parseInt(vl));
+                qpe.left=nn;
+                q.add(nn);
+            }
+            vl=z.next();
+            if(!vl.equals("Null"))
+            {
+                nn=new Node(Integer.parseInt(vl));
+                qpe.right=nn;
+                q.add(nn);
+            }
+            
+            
+        }
+
+        ArrayList<Integer> view = leftView(root);
+        for (int v : view) {
+            System.out.print(v + " ");
+        }
+        System.out.println();
+    }
+}
+
+===============right view================
+import java.util.*;
+
+class Node {
+    int data;
+    Node left, right;
+
+    Node(int x) {
+        data = x;
+        left = right = null;
+    }
+}
+
+class GfG {
+     static ArrayList<Integer> topView(Node root) {
+        ArrayList<Integer> result = new ArrayList<>();
+        if (root == null) return result;
+
+        // Map to store the first node at each 
+      	// horizontal distance (hd)
+        Map<Integer, Integer> topNodes = new TreeMap<>();
+
+        // Queue to store nodes along with their horizontal distance
+        Queue<Map.Entry<Node, Integer>> q = new LinkedList<>();
+
+        // Start BFS with the root node at horizontal distance 0
+        q.add(new AbstractMap.SimpleEntry<>(root, 0));
+
+        while (!q.isEmpty()) {
+            Map.Entry<Node, Integer> nodeHd = q.poll();
+
+            // Current node
+            Node node = nodeHd.getKey();
+
+            // Current horizontal distance
+            int hd = nodeHd.getValue();
+
+            // If this horizontal distance is seen for
+          	// the first time, store the node
+            if (!topNodes.containsKey(hd)) {
+                topNodes.put(hd, node.data);
+            }
+
+            // Add left child to the queue with horizontal distance - 1
+            if (node.left != null) {
+                q.add(new AbstractMap.SimpleEntry<>(node.left, hd - 1));
+            }
+
+            // Add right child to the queue with horizontal
+          	// distance + 1
+            if (node.right != null) {
+                q.add(new AbstractMap.SimpleEntry<>(node.right, hd + 1));
+            }
+        }
+
+        // Extract the nodes from the map in sorted order
+      	// of their horizontal distances
+        for (Integer value : topNodes.values()) {
+            result.add(value);
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Scanner z=new Scanner(System.in);
+        Queue<Node> q=new LinkedList<>();
+        int val=z.nextInt();
+        Node nn=new Node(val);
+        Node root=nn;
+        q.add(nn);
+        while(!q.isEmpty()&&z.hasNext())
+        {
+            Node qpe=q.poll();
+            String vl=z.next();
+            if(!vl.equals("Null"))
+            {
+                nn=new Node(Integer.parseInt(vl));
+                qpe.left=nn;
+                q.add(nn);
+            }
+            vl=z.next();
+            if(!vl.equals("Null"))
+            {
+                nn=new Node(Integer.parseInt(vl));
+                qpe.right=nn;
+                q.add(nn);
+            }
+            
+            
+        }
+
+        ArrayList<Integer> view =  topView(root);
+        for (int v : view) {
+            System.out.print(v + " ");
+        }
+        System.out.println();
+    }
+}
