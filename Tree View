@@ -1,1 +1,104 @@
+======================================================LEFT VIEW - BFS(Level order - Queue)==========================================================
+static void LeftView(node root)
+    {
+        Queue<node> q=new LinkedList<>();
+        q.add(root);
+        while(!q.isEmpty())
+        {
+            int n=q.size();
+            System.out.print(q.peek().data+" ");
+            for(int i=0;i<n;i++)
+            {
+                node t=q.poll();
+                if(t.left!=null)
+                    q.add(t.left);
+                if(t.right!=null)
+                    q.add(t.right);
+            }   
+        }
+    }
+==========================================LEFT VIEW - BFS(Level order - Queue)========Easy===========================================================
+static void LeftView(node root)
+    {
+        Queue<node> q=new LinkedList<>();
+        q.add(root);
+        while(!q.isEmpty())
+        {
+            int n=q.size();
+           
+            for(int i=0;i<n;i++)
+            {
+                node t=q.poll();
+                if(i==0)                                         //   if(i==n-1) right view
+                     System.out.print(t.data+" ");
+                
+                if(t.left!=null)
+                    q.add(t.left);
+                if(t.right!=null)
+                    q.add(t.right);
+            }   
+        }
+    }
+===============================================Right VIEW - BFS(Level order - Queue)========Easy==================================================================================================================
+static void RightView(node root)
+    {
+        Queue<node> q=new LinkedList<>();
+        if(root==null)
+          return;
+        q.add(root);
+        while(!q.isEmpty())
+        {
+            int n=q.size();
+           
+            for(int i=0;i<n;i++)
+            {
+                node t=q.poll();
+                if(i==n-1)                                       
+                     System.out.print(t.data+" ");
+                
+                if(t.left!=null)
+                    q.add(t.left);
+                if(t.right!=null)
+                    q.add(t.right);
+            }   
+        }
+    }
+=================================================
 
+============================================LEFT VIEW - DFS=============================================================================================================
+static int max_lev=0;
+    static void dis(node root,int cur_lev)
+    {
+        
+        if(root==null)
+            return;
+        if(cur_lev > max_lev)
+        {
+            System.out.print(root.data+" ");
+            max_lev=cur_lev;
+        }
+        dis(root.left,cur_lev+1);            //right - left call -> Right view 
+        dis(root.right,cur_lev+1);
+    }
+====================================================Right VIEW - DFS=========================================================================================
+static int max_lev=0;
+    static void dis(node root,int cur_lev)
+    {
+        
+        if(root==null)
+            return;
+        if(cur_lev > max_lev)
+        {
+            System.out.print(root.data+" ");
+            max_lev=cur_lev;
+        }
+        
+        dis(root.right,cur_lev+1);
+        dis(root.left,cur_lev+1);
+    }
+==================================Key Differences===========================================================
+Feature	                  Left View 👈	                      Right View 👉
+Node printed	         First node of level	               Last node of level
+Condition	                   i == 0	                            i == n - 1
+Traversal order	          Left → Right	                  Left → Right (same!)
+Core logic change	     Only the if condition	           Only the if condition
