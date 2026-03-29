@@ -97,8 +97,55 @@ static int max_lev=0;
         dis(root.left,cur_lev+1);
     }
 ==================================Key Differences===========================================================
-Feature	                  Left View 👈	                      Right View 👉
+Feature	                  Left View 	                      Right View 
 Node printed	         First node of level	               Last node of level
 Condition	                   i == 0	                            i == n - 1
 Traversal order	          Left → Right	                  Left → Right (same!)
 Core logic change	     Only the if condition	           Only the if condition
+========================================================================================================================
+=============================================Top_view====Level(Queue)========================================================================
+static void Top_view(node root,int lev,int c_lev)
+    {
+        Queue<pair> q=new LinkedList<>();
+        TreeMap<Integer,Integer> tm=new TreeMap<>();
+        q.add(new pair(0,root));
+        while(!q.isEmpty())
+        {
+            pair t=q.poll();
+            if(!tm.containsKey(t.h_lev))    //if store last h_level it's bottom view so if simply remove if condition
+            {
+                tm.put(t.h_lev,t.nd.data);
+            }
+            if(t.nd.left!=null)
+                q.add(new pair(t.h_lev-1,t.nd.left));
+            if(t.nd.right!=null)
+                q.add(new pair(t.h_lev+1,t.nd.right));
+        }
+        for(int a:tm.values())
+        {
+            System.out.print(a+ " ");
+        }
+        
+    }
+===================================Bottom_view - Level(Queue)============================================================
+static void Bottom_view(node root,int lev,int c_lev)
+    {
+        Queue<pair> q=new LinkedList<>();
+        TreeMap<Integer,Integer> tm=new TreeMap<>();
+        q.add(new pair(0,root));
+        while(!q.isEmpty())
+        {
+            pair t=q.poll();
+            tm.put(t.h_lev,t.nd.data);
+            if(t.nd.left!=null)
+                q.add(new pair(t.h_lev-1,t.nd.left));
+            if(t.nd.right!=null)
+                q.add(new pair(t.h_lev+1,t.nd.right));
+        }
+        for(int a:tm.values())
+        {
+            System.out.print(a+ " ");
+        }
+        
+    }
+=======================================================================================================
